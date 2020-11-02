@@ -71,8 +71,8 @@ class _Curve1 extends CustomPainter {
 class _Curve2 extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final rect = new Rect.fromCircle(
-        center: Offset(size.width, size.height), radius: 3000);
+    final rect =
+        new Rect.fromCircle(center: Offset(size.width, 0), radius: 1800);
 
     final gradiants = new LinearGradient(
         begin: Alignment.topCenter,
@@ -82,7 +82,7 @@ class _Curve2 extends CustomPainter {
           Colors.white,
         ],
         stops: [
-          0.01,
+          0.15,
           1.0,
         ]);
 
@@ -92,11 +92,12 @@ class _Curve2 extends CustomPainter {
     paint.strokeWidth = 5;
     final path = new Path();
     double dy = 15.0;
+    double dx = 5.0;
     path.moveTo(0, size.height * 0.46 + dy);
     //Wave
-    path.quadraticBezierTo(size.width * 0.5, size.height * 0.43 + dy,
-        size.width * 0.6, size.height * 0.35 + dy);
-    path.quadraticBezierTo(size.width * .80, size.height * 0.23 + dy,
+    path.quadraticBezierTo(size.width * 0.5 + dx, size.height * 0.43 + dy,
+        size.width * 0.6 + dx + 5, size.height * 0.35 + dy);
+    path.quadraticBezierTo(size.width * .80 + dx, size.height * 0.23 + dy,
         size.width, size.height * 0.23 + dy);
 
     path.lineTo(size.width, size.height);
