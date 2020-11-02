@@ -34,7 +34,7 @@ class BackgroundWidget extends StatelessWidget {
     return Container(
       height: _size.height,
       decoration: BoxDecoration(
-        color: kBlueColor,
+        color: kMainColor,
       ),
     );
   }
@@ -44,7 +44,7 @@ class _Curve1 extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = new Paint();
-    paint.color = kGreenColor;
+    paint.color = kMainColor;
     paint.style = PaintingStyle.fill;
     paint.strokeWidth = 5;
     final path = new Path();
@@ -87,7 +87,7 @@ class _Curve2 extends CustomPainter {
         ]);
 
     final paint = new Paint()..shader = gradiants.createShader(rect);
-    paint.color = kGreenColor;
+    paint.color = kSecondaryColor;
     paint.style = PaintingStyle.fill;
     paint.strokeWidth = 5;
     final path = new Path();

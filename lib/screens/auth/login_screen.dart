@@ -1,4 +1,5 @@
 import 'package:control_escolar/const/const.dart';
+import 'package:control_escolar/screens/alumno/home_alumno_screen.dart';
 import 'package:control_escolar/screens/auth/widgets/background_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -23,17 +24,15 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _scaffold() {
     return Container(
       child: SingleChildScrollView(
-        child: SafeArea(
-          child: Column(
-            children: [
-              Stack(
-                children: [
-                  BackgroundWidget(),
-                  _mainContent(),
-                ],
-              )
-            ],
-          ),
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                BackgroundWidget(),
+                _mainContent(),
+              ],
+            )
+          ],
         ),
       ),
     );
@@ -73,10 +72,15 @@ class _LoginScreenState extends State<LoginScreen> {
       width: double.infinity,
       child: RaisedButton(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18.0),
+          borderRadius: BorderRadius.circular(16.0),
         ),
-        onPressed: () {},
-        color: kGreenColor,
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomeAlumnoScreen()),
+          );
+        },
+        color: kSecondaryColor,
         textColor: Colors.white,
         child: Text("Iniciar sesión".toUpperCase(),
             style: TextStyle(fontSize: 14)),
@@ -104,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Text(
       "Iniciar sesión",
       style: TextStyle(
-        color: kBlueColor,
+        color: kMainColor,
         fontWeight: FontWeight.w700,
         fontSize: 24.0,
       ),

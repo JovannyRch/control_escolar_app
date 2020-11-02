@@ -1,4 +1,17 @@
 import 'package:flutter/material.dart';
 
-final kBlueColor = Color(0xFF394A6D);
-final kGreenColor = Color(0xFF3C9D9B);
+final kMainColor = Color(0xFF394A6D);
+final kSecondaryColor = Color(0xFF3C9D9B);
+
+final kGreyColor = Color(0xFFF8F8F8);
+final kWhiteBackgroundColor = Color(0xFFF5F5F5);
+final kDisableColor = Color(0xFF787878);
+final kDangerColor = Color(0xFFFF4F19);
+
+final kTextMainStyle = TextStyle(
+  color: kMainColor,
+);
+
+final kSecondaryTextColor = Color(0xFF868491);
+
+final double pi = 3.1415926535897932;
