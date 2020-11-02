@@ -21,9 +21,15 @@ class NoticiaWidget extends StatelessWidget {
       height: 130.0,
       margin: EdgeInsets.only(bottom: 16.0),
       decoration: BoxDecoration(
-        color: kGreyColor,
-        borderRadius: BorderRadius.circular(4.0),
-      ),
+          color: kGreyColor,
+          borderRadius: BorderRadius.circular(4.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.25),
+              offset: Offset(0, 3),
+              blurRadius: 3.0,
+            )
+          ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
