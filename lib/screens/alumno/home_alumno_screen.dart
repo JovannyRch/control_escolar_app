@@ -25,7 +25,7 @@ class _HomeAlumnoScreenState extends State<HomeAlumnoScreen> {
         automaticallyImplyLeading: false,
         title: _titleAppbar(),
         backgroundColor: kGreyColor,
-        elevation: 1,
+        elevation: 0,
         actions: [
           _menuIcon(),
         ],
