@@ -1,4 +1,4 @@
-package com.example.control_escolar
+package com.jovals.ctrlescolar
 
 import io.flutter.embedding.android.FlutterActivity
 
