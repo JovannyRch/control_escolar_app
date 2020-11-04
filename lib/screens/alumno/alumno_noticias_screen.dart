@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/models/NoticiaModel.dart';
 import 'package:control_escolar/widgets/NoticiaWidget.dart';
+import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -14,9 +15,54 @@ class AlumnoNoticiasScreen extends StatefulWidget {
 }
 
 class _AlumnoNoticiasScreenState extends State<AlumnoNoticiasScreen> {
+  List<NoticiaModel> noticias = [
+    NoticiaModel(
+      id: 1,
+      title: "Noticia 1",
+      description:
+          "Adipisicing qui id labore mollit laborum ipsum fugiat est sit proident duis magna eiusmod. Voluptate enim quis enim reprehenderit est labore id. Deserunt in aliqua laborum reprehenderit veniam irure magna ad. Id occaecat id anim mollit sit qui ad voluptate quis exercitation irure ullamco tempor id. Mollit sunt nulla fugiat sint aliquip consequat officia fugiat reprehenderit irure magna. Laboris laboris magna elit consectetur ea quis adipisicing anim id ex eu ad aliquip. Labore laborum aute in enim qui labore reprehenderit in nisi nisi nulla in et.",
+      content: "",
+    ),
+    NoticiaModel(
+      id: 1,
+      title: "Noticia 1",
+      description:
+          "Adipisicing qui id labore mollit laborum ipsum fugiat est sit proident duis magna eiusmod. Voluptate enim quis enim reprehenderit est labore id. Deserunt in aliqua laborum reprehenderit veniam irure magna ad. Id occaecat id anim mollit sit qui ad voluptate quis exercitation irure ullamco tempor id. Mollit sunt nulla fugiat sint aliquip consequat officia fugiat reprehenderit irure magna. Laboris laboris magna elit consectetur ea quis adipisicing anim id ex eu ad aliquip. Labore laborum aute in enim qui labore reprehenderit in nisi nisi nulla in et.",
+      content: "",
+    ),
+    NoticiaModel(
+      id: 1,
+      title: "Noticia 1",
+      description:
+          "Adipisicing qui id labore mollit laborum ipsum fugiat est sit proident duis magna eiusmod. Voluptate enim quis enim reprehenderit est labore id. Deserunt in aliqua laborum reprehenderit veniam irure magna ad. Id occaecat id anim mollit sit qui ad voluptate quis exercitation irure ullamco tempor id. Mollit sunt nulla fugiat sint aliquip consequat officia fugiat reprehenderit irure magna. Laboris laboris magna elit consectetur ea quis adipisicing anim id ex eu ad aliquip. Labore laborum aute in enim qui labore reprehenderit in nisi nisi nulla in et.",
+      content: "",
+    ),
+    NoticiaModel(
+      id: 1,
+      title: "Noticia 1",
+      description:
+          "Adipisicing qui id labore mollit laborum ipsum fugiat est sit proident duis magna eiusmod. Voluptate enim quis enim reprehenderit est labore id. Deserunt in aliqua laborum reprehenderit veniam irure magna ad. Id occaecat id anim mollit sit qui ad voluptate quis exercitation irure ullamco tempor id. Mollit sunt nulla fugiat sint aliquip consequat officia fugiat reprehenderit irure magna. Laboris laboris magna elit consectetur ea quis adipisicing anim id ex eu ad aliquip. Labore laborum aute in enim qui labore reprehenderit in nisi nisi nulla in et.",
+      content: "",
+    ),
+    NoticiaModel(
+      id: 1,
+      title: "Noticia 1",
+      description:
+          "Adipisicing qui id labore mollit laborum ipsum fugiat est sit proident duis magna eiusmod. Voluptate enim quis enim reprehenderit est labore id. Deserunt in aliqua laborum reprehenderit veniam irure magna ad. Id occaecat id anim mollit sit qui ad voluptate quis exercitation irure ullamco tempor id. Mollit sunt nulla fugiat sint aliquip consequat officia fugiat reprehenderit irure magna. Laboris laboris magna elit consectetur ea quis adipisicing anim id ex eu ad aliquip. Labore laborum aute in enim qui labore reprehenderit in nisi nisi nulla in et.",
+      content: "",
+    ),
+    NoticiaModel(
+      id: 1,
+      title: "Noticia 1",
+      description:
+          "Adipisicing qui id labore mollit laborum ipsum fugiat est sit proident duis magna eiusmod. Voluptate enim quis enim reprehenderit est labore id. Deserunt in aliqua laborum reprehenderit veniam irure magna ad. Id occaecat id anim mollit sit qui ad voluptate quis exercitation irure ullamco tempor id. Mollit sunt nulla fugiat sint aliquip consequat officia fugiat reprehenderit irure magna. Laboris laboris magna elit consectetur ea quis adipisicing anim id ex eu ad aliquip. Labore laborum aute in enim qui labore reprehenderit in nisi nisi nulla in et.",
+      content: "",
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    ;
+    noticias = [];
     return Column(
       children: [
         _bannerApreciacion(),
@@ -83,63 +129,21 @@ class _AlumnoNoticiasScreenState extends State<AlumnoNoticiasScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(height: 28.0),
-            _title(),
+            TitleWidget(title: "Noticias"),
             SizedBox(height: 8.0),
             Expanded(
               child: Container(
-                child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      NoticiaWidget(
-                        noticia: NoticiaModel(
-                          id: 1,
-                          title: "Noticia 1",
-                          description:
-                              "Adipisicing qui id labore mollit laborum ipsum fugiat est sit proident duis magna eiusmod. Voluptate enim quis enim reprehenderit est labore id. Deserunt in aliqua laborum reprehenderit veniam irure magna ad. Id occaecat id anim mollit sit qui ad voluptate quis exercitation irure ullamco tempor id. Mollit sunt nulla fugiat sint aliquip consequat officia fugiat reprehenderit irure magna. Laboris laboris magna elit consectetur ea quis adipisicing anim id ex eu ad aliquip. Labore laborum aute in enim qui labore reprehenderit in nisi nisi nulla in et.",
-                          content: "",
+                child: noticias.length == 0
+                    ? _empty()
+                    : SingleChildScrollView(
+                        physics: BouncingScrollPhysics(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: noticias
+                              .map((e) => NoticiaWidget(noticia: e))
+                              .toList(),
                         ),
                       ),
-                      NoticiaWidget(
-                        noticia: NoticiaModel(
-                          id: 1,
-                          title: "Noticia 2",
-                          description:
-                              "Adipisicing qui id labore mollit laborum ipsum fugiat est sit proident duis magna eiusmod. Voluptate enim quis enim reprehenderit est labore id. Deserunt in aliqua laborum reprehenderit veniam irure magna ad. Id occaecat id anim mollit sit qui ad voluptate quis exercitation irure ullamco tempor id. Mollit sunt nulla fugiat sint aliquip consequat officia fugiat reprehenderit irure magna. Laboris laboris magna elit consectetur ea quis adipisicing anim id ex eu ad aliquip. Labore laborum aute in enim qui labore reprehenderit in nisi nisi nulla in et.",
-                          content: "",
-                        ),
-                      ),
-                      NoticiaWidget(
-                        noticia: NoticiaModel(
-                          id: 1,
-                          title: "Noticia 3",
-                          description:
-                              "Adipisicing qui id labore mollit laborum ipsum fugiat est sit proident duis magna eiusmod. Voluptate enim quis enim reprehenderit est labore id. Deserunt in aliqua laborum reprehenderit veniam irure magna ad. Id occaecat id anim mollit sit qui ad voluptate quis exercitation irure ullamco tempor id. Mollit sunt nulla fugiat sint aliquip consequat officia fugiat reprehenderit irure magna. Laboris laboris magna elit consectetur ea quis adipisicing anim id ex eu ad aliquip. Labore laborum aute in enim qui labore reprehenderit in nisi nisi nulla in et.",
-                          content: "",
-                        ),
-                      ),
-                      NoticiaWidget(
-                        noticia: NoticiaModel(
-                          id: 1,
-                          title: "Noticia 4",
-                          description:
-                              "Adipisicing qui id labore mollit laborum ipsum fugiat est sit proident duis magna eiusmod. Voluptate enim quis enim reprehenderit est labore id. Deserunt in aliqua laborum reprehenderit veniam irure magna ad. Id occaecat id anim mollit sit qui ad voluptate quis exercitation irure ullamco tempor id. Mollit sunt nulla fugiat sint aliquip consequat officia fugiat reprehenderit irure magna. Laboris laboris magna elit consectetur ea quis adipisicing anim id ex eu ad aliquip. Labore laborum aute in enim qui labore reprehenderit in nisi nisi nulla in et.",
-                          content: "",
-                        ),
-                      ),
-                      NoticiaWidget(
-                        noticia: NoticiaModel(
-                          id: 1,
-                          title: "Noticia 4",
-                          description:
-                              "Adipisicing qui id labore mollit laborum ipsum fugiat est sit proident duis magna eiusmod. Voluptate enim quis enim reprehenderit est labore id. Deserunt in aliqua laborum reprehenderit veniam irure magna ad. Id occaecat id anim mollit sit qui ad voluptate quis exercitation irure ullamco tempor id. Mollit sunt nulla fugiat sint aliquip consequat officia fugiat reprehenderit irure magna. Laboris laboris magna elit consectetur ea quis adipisicing anim id ex eu ad aliquip. Labore laborum aute in enim qui labore reprehenderit in nisi nisi nulla in et.",
-                          content: "",
-                        ),
-                      )
-                    ],
-                  ),
-                ),
               ),
             ),
           ],
@@ -148,13 +152,30 @@ class _AlumnoNoticiasScreenState extends State<AlumnoNoticiasScreen> {
     );
   }
 
-  Widget _title() {
-    return Text(
-      "Noticias",
-      style: TextStyle(
-        color: kMainColor,
-        fontSize: 17.0,
-        fontWeight: FontWeight.bold,
+  Widget _empty() {
+    return Center(
+      child: Container(
+        height: 170,
+        width: 170,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Color(0xFFFFE3E3),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FaIcon(FontAwesomeIcons.newspaper, size: 64),
+            SizedBox(height: 8),
+            Text(
+              "No tienes noticias",
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 12.0,
+                color: Color(0xFFFF0C0C),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
