@@ -62,7 +62,7 @@ class _AlumnoNoticiasScreenState extends State<AlumnoNoticiasScreen> {
 
   @override
   Widget build(BuildContext context) {
-    noticias = [];
+    //noticias = [];
     return Column(
       children: [
         _bannerApreciacion(),

@@ -125,10 +125,17 @@ class _LoginScreenState extends State<LoginScreen> {
         shape: BoxShape.circle,
         color: Colors.white,
       ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(300.0),
+        child: Image.asset(
+          "assets/images/logo.jpeg",
+          fit: BoxFit.fitWidth,
+        ),
+      ),
     );
 
     var name = Text(
-      "EPO 14",
+      "EPO 60",
       style: TextStyle(
         color: Colors.white,
         fontSize: 16.0,
