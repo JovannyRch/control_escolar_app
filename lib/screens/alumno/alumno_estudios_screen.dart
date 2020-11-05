@@ -19,7 +19,7 @@ class _AlumnoEstudiosScreenState extends State<AlumnoEstudiosScreen> {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: kGreyColor,
+          backgroundColor: Colors.grey.shade100,
           bottom: TabBar(
             labelColor: kSecondaryColor,
             indicatorColor: kSecondaryColor,

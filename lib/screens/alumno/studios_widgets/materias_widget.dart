@@ -1,6 +1,9 @@
-import 'package:control_escolar/const/const.dart';
+import 'package:control_escolar/models/MateriaModel.dart';
+import 'package:control_escolar/widgets/DividerLine.dart';
+import 'package:control_escolar/widgets/MateriaCardWidget.dart';
 import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MateriasWidget extends StatefulWidget {
   MateriasWidget({Key key}) : super(key: key);
@@ -11,6 +14,17 @@ class MateriasWidget extends StatefulWidget {
 
 class _MateriasWidget extends State<MateriasWidget> {
   Size _size;
+
+  List<MateriaCalificacionModel> calificaciones = [
+    MateriaCalificacionModel(
+        nombre: "Languaje de programación Orientada a Objetos",
+        calificacion: 9.9),
+    MateriaCalificacionModel(nombre: "Sistemas Operativos", calificacion: 4.9),
+    MateriaCalificacionModel(
+        nombre: "Tipos de Sistemas Operativos", calificacion: 5.9),
+    MateriaCalificacionModel(
+        nombre: "Lenguaje de programación visual", calificacion: 7.9),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +37,8 @@ class _MateriasWidget extends State<MateriasWidget> {
           children: [
             SizedBox(height: 20.0),
             TitleWidget(title: "Mis materias"),
-            SizedBox(height: 8.0),
-            Placeholder(fallbackHeight: 200),
+            SizedBox(height: 16.0),
+            _materiasContainer(),
             SizedBox(height: 16.0),
             TitleWidget(title: "Mis profesores"),
             SizedBox(height: 18.0),
@@ -46,6 +60,23 @@ class _MateriasWidget extends State<MateriasWidget> {
     );
   }
 
+  //Materias container
+  Widget _materiasContainer() {
+    return Container(
+      height: 120.0,
+      child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: calificaciones
+              .map((c) => MateriaCalificacionCardWidget(materia: c))
+              .toList(),
+        ),
+      ),
+    );
+  }
+
+  //Profesor container
   Widget _profesoreContainer() {
     return Container(
         margin: EdgeInsets.only(bottom: 14.0),
@@ -62,12 +93,7 @@ class _MateriasWidget extends State<MateriasWidget> {
               children: [
                 _profesorName(),
                 _materiaName(),
-                Container(
-                  margin: EdgeInsets.only(top: 17.0),
-                  height: 0.5,
-                  width: _size.width * 0.75,
-                  color: Colors.black26,
-                ),
+                DividerLine(width: _size.width * 0.75),
               ],
             )
           ],
