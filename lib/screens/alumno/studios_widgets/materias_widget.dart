@@ -2,6 +2,7 @@ import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/models/MateriaModel.dart';
 import 'package:control_escolar/widgets/DividerLine.dart';
 import 'package:control_escolar/widgets/MateriaCardWidget.dart';
+import 'package:control_escolar/widgets/ProfesorTileWidget.dart';
 import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -80,42 +81,8 @@ class _MateriasWidget extends State<MateriasWidget> {
   //Profesor container
   Widget _profesoreContainer() {
     return Container(
-        margin: EdgeInsets.only(bottom: 14.0),
-        child: Row(
-          children: [
-            CircleAvatar(
-              radius: 18.0,
-              backgroundColor: Colors.transparent,
-              child: Image.asset("assets/images/icon-teacher.png"),
-            ),
-            SizedBox(width: 16.0),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _profesorName(),
-                _materiaName(),
-                DividerLine(width: _size.width * 0.75),
-              ],
-            )
-          ],
-        ));
-  }
-
-  Widget _profesorName() {
-    return Text(
-      "Francisco Chavez Castañeda",
-      style: TextStyle(
-        fontWeight: FontWeight.w400,
-        fontSize: 13.0,
-      ),
-    );
-  }
-
-  Widget _materiaName() {
-    return Text(
-      "Lenguaje de Programación Orientada a Objetos",
-      style: TextStyle(
-          fontWeight: FontWeight.w400, fontSize: 10.0, color: Colors.black54),
+      margin: EdgeInsets.only(bottom: 14.0),
+      child: ProfesorTileWidget(),
     );
   }
 }

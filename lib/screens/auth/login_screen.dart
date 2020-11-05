@@ -78,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
         onPressed: () {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => HomePadreScreen()),
+            MaterialPageRoute(builder: (context) => HomeAlumnoScreen()),
           );
         },
         color: kSecondaryColor,

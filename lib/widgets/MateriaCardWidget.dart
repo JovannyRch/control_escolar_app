@@ -1,5 +1,6 @@
 import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/models/MateriaModel.dart';
+import 'package:control_escolar/screens/alumno/screens/materia_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -10,21 +11,29 @@ class MateriaCalificacionCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 13.0),
-      width: 200.0,
-      height: 100.0,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0),
-        boxShadow: [
-          BoxShadow(
-              offset: Offset(4, 4), blurRadius: 2.0, color: Colors.black12),
-        ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MateriaDetailsScreen()),
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.only(right: 13.0),
+        width: 200.0,
+        height: 100.0,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.0),
+          boxShadow: [
+            BoxShadow(
+                offset: Offset(4, 4), blurRadius: 2.0, color: Colors.black12),
+          ],
+        ),
+        child: Row(children: [
+          _infoContainer(),
+          _linkContainer(),
+        ]),
       ),
-      child: Row(children: [
-        _infoContainer(),
-        _linkContainer(),
-      ]),
     );
   }
 

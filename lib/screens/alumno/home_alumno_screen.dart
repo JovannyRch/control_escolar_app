@@ -2,6 +2,7 @@ import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/screens/alumno/alumno_asistencia_screen.dart';
 import 'package:control_escolar/screens/alumno/alumno_estudios_screen.dart';
 import 'package:control_escolar/screens/alumno/alumno_noticias_screen.dart';
+import 'package:control_escolar/widgets/CustomAppBar.dart';
 import 'package:control_escolar/widgets/SideMenu.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -21,12 +22,14 @@ class _HomeAlumnoScreenState extends State<HomeAlumnoScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       drawer: SideMenu(),
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: _titleAppbar(),
-        elevation: 0,
+      appBar: CustomAppBar(
+        title: "Jovanny Ramírez Chimal",
+        subtitle: "Alumno",
         actions: [
-          _menuIcon(),
+          Container(
+            padding: EdgeInsets.only(right: 13.0),
+            child: Icon(Icons.menu, color: Colors.black),
+          )
         ],
       ),
       body: _body(),
@@ -73,38 +76,6 @@ class _HomeAlumnoScreenState extends State<HomeAlumnoScreen> {
         AlumnoNoticiasScreen(),
         AlumnoEstudiosScreen(),
         AlumnoAsistenciasScreen(),
-      ],
-    );
-  }
-
-  Widget _menuIcon() {
-    return Container(
-      padding: EdgeInsets.only(right: 13.0),
-      child: Icon(Icons.menu, color: Colors.black),
-    );
-  }
-
-  Widget _titleAppbar() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Jovanny Ramírez Chimal",
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w400,
-            fontSize: 14,
-          ),
-        ),
-        Text(
-          "Alumno",
-          style: TextStyle(
-            color: kDisableColor,
-            fontWeight: FontWeight.w300,
-            fontSize: 13,
-          ),
-        )
       ],
     );
   }
