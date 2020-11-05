@@ -16,19 +16,21 @@ class HomeAlumnoScreen extends StatefulWidget {
 
 class _HomeAlumnoScreenState extends State<HomeAlumnoScreen> {
   int _currentIndex = 0;
+  var scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: Colors.white,
-      drawer: SideMenu(),
+      endDrawer: SideMenu(),
       appBar: CustomAppBar(
         title: "Jovanny Ramírez Chimal",
         subtitle: "Alumno",
         actions: [
-          Container(
-            padding: EdgeInsets.only(right: 13.0),
-            child: Icon(Icons.menu, color: Colors.black),
+          IconButton(
+            icon: Icon(Icons.menu, color: Colors.black),
+            onPressed: () => scaffoldKey.currentState.openEndDrawer(),
           )
         ],
       ),
