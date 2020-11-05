@@ -1,4 +1,5 @@
 import 'package:control_escolar/models/MateriaModel.dart';
+import 'package:control_escolar/widgets/DividerLine.dart';
 import 'package:control_escolar/widgets/MateriaCardWidget.dart';
 import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
@@ -92,12 +93,7 @@ class _MateriasWidget extends State<MateriasWidget> {
               children: [
                 _profesorName(),
                 _materiaName(),
-                Container(
-                  margin: EdgeInsets.only(top: 17.0),
-                  height: 0.5,
-                  width: _size.width * 0.75,
-                  color: Colors.black26,
-                ),
+                DividerLine(width: _size.width * 0.75),
               ],
             )
           ],
