@@ -1,3 +1,4 @@
+import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/models/MateriaModel.dart';
 import 'package:control_escolar/widgets/DividerLine.dart';
 import 'package:control_escolar/widgets/MateriaCardWidget.dart';
@@ -36,11 +37,11 @@ class _MateriasWidget extends State<MateriasWidget> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(height: 20.0),
-            TitleWidget(title: "Mis materias"),
+            TitleWidget(title: "Mis materias", color: kMainColor),
             SizedBox(height: 16.0),
             _materiasContainer(),
             SizedBox(height: 16.0),
-            TitleWidget(title: "Mis profesores"),
+            TitleWidget(title: "Mis profesores", color: kMainColor),
             SizedBox(height: 18.0),
             Expanded(
                 child: Container(

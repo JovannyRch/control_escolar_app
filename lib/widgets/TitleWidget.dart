@@ -3,18 +3,19 @@ import 'package:flutter/material.dart';
 
 class TitleWidget extends StatelessWidget {
   final String title;
-  TitleWidget({@required this.title});
+  final Color color;
+  TitleWidget({@required this.title, @required this.color});
 
   @override
   Widget build(BuildContext context) {
-    return _title(this.title);
+    return _title(this.title, this.color);
   }
 
-  Widget _title(String text) {
+  Widget _title(String text, Color color) {
     return Text(
       text,
       style: TextStyle(
-        color: kMainColor,
+        color: color,
         fontSize: 17.0,
         fontWeight: FontWeight.bold,
       ),

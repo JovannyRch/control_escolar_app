@@ -39,7 +39,7 @@ class _ReglamentosWidget extends State<ReglamentosWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          TitleWidget(title: "Reglamento"),
+          TitleWidget(title: "Reglamento", color: kMainColor),
           SizedBox(height: 10.0),
           Expanded(
               child: Container(

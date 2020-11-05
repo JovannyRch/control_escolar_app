@@ -39,7 +39,7 @@ class _PlanesWidget extends State<PlanesWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          TitleWidget(title: "Plan de estudios"),
+          TitleWidget(title: "Plan de estudios", color: kMainColor),
           SizedBox(height: 10.0),
           Expanded(
               child: Container(

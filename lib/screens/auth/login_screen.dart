@@ -1,6 +1,7 @@
 import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/screens/alumno/home_alumno_screen.dart';
 import 'package:control_escolar/screens/auth/widgets/background_widget.dart';
+import 'package:control_escolar/screens/padre/home_padre_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -77,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
         onPressed: () {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => HomeAlumnoScreen()),
+            MaterialPageRoute(builder: (context) => HomePadreScreen()),
           );
         },
         color: kSecondaryColor,

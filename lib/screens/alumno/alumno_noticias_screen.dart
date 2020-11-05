@@ -129,7 +129,7 @@ class _AlumnoNoticiasScreenState extends State<AlumnoNoticiasScreen> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(height: 28.0),
-            TitleWidget(title: "Noticias"),
+            TitleWidget(title: "Noticias", color: kMainColor),
             SizedBox(height: 8.0),
             Expanded(
               child: Container(
