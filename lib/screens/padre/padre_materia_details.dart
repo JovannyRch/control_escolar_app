@@ -10,6 +10,10 @@ class PadreMateriaDetails extends StatefulWidget {
 class _PadreMateriaDetailsState extends State<PadreMateriaDetails> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Detalle materia'),
+      ),
+    );
   }
 }

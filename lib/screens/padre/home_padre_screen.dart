@@ -1,4 +1,6 @@
 import 'package:control_escolar/const/const.dart';
+import 'package:control_escolar/models/AlumnoModel.dart';
+import 'package:control_escolar/widgets/HijoListItemWidget.dart';
 import 'package:control_escolar/widgets/SideMenu.dart';
 import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
@@ -12,14 +14,33 @@ class HomePadreScreen extends StatefulWidget {
 }
 
 class _HomePadreScreenState extends State<HomePadreScreen> {
-  List<String> hijos = ['Juan perex Guitierrez', 'Martha Perez Guitierrez'];
+  var scaffoldKey = GlobalKey<ScaffoldState>();
+  List<AlumnoModel> hijos = [
+    AlumnoModel(
+        id: 1,
+        apellidoMaterno: 'Perez',
+        apellidoPaterno: 'Ramirez',
+        nombre: 'Juan',
+        matricula: 1520934,
+        semestre: 1,
+        img: 'assets/images/icon-student.png'),
+    AlumnoModel(
+        id: 1,
+        apellidoMaterno: 'Perez',
+        apellidoPaterno: 'Ramirez',
+        nombre: 'Martha',
+        matricula: 1520934,
+        semestre: 6,
+        img: 'assets/images/icon-student2.png')
+  ];
 
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: Colors.white,
-      drawer: SideMenu(),
+      endDrawer: SideMenu(),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: _titleAppbar(),
@@ -101,6 +122,9 @@ class _HomePadreScreenState extends State<HomePadreScreen> {
                             physics: BouncingScrollPhysics(),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: hijos
+                                  .map((e) => HijoListItemWidget(hijo: e))
+                                  .toList(),
                             ),
                           ),
                   ),
@@ -115,9 +139,11 @@ class _HomePadreScreenState extends State<HomePadreScreen> {
 
   Widget _menuIcon() {
     return Container(
-      padding: EdgeInsets.only(right: 13.0),
-      child: Icon(Icons.menu, color: Colors.black),
-    );
+        padding: EdgeInsets.only(right: 13.0),
+        child: IconButton(
+          icon: Icon(Icons.menu, color: Colors.black),
+          onPressed: () => scaffoldKey.currentState.openEndDrawer(),
+        ));
   }
 
   Widget _titleAppbar() {

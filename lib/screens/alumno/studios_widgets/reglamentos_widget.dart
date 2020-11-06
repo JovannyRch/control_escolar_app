@@ -92,7 +92,7 @@ class _ReglamentosWidget extends State<ReglamentosWidget> {
                   ),
                 ),
               ),
-              DividerLine(width: _size.width * 0.7),
+              DividerLine(width: _size.width * 0.7, color: Colors.black26),
             ],
           ),
         ],
