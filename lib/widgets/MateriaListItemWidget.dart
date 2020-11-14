@@ -17,40 +17,22 @@ class MateriaListItemWidget extends StatelessWidget {
             MaterialPageRoute(builder: (context) => PadreMateriaDetails()),
           );
         },
-        child: Row(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                    padding: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width / 10,
-                        top: MediaQuery.of(context).size.width / 20),
-                    child: _materiaName()),
-                Padding(
-                    padding: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width / 10,
-                        top: MediaQuery.of(context).size.width / 60),
-                    child: _matriculamateria()),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width / 10,
-                      top: MediaQuery.of(context).size.width / 60),
-                  child: _semestremateria(),
-                ),
-                /*  IconButton(
-                    icon: Icon(Icons.more, color: Colors.white),
-                    onPressed: null), */
-                Padding(
-                    padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width / 10,
-                    ),
-                    child: DividerLine(
-                        width: MediaQuery.of(context).size.width * 0.75,
-                        color: Colors.white)),
-              ],
-            )
-          ],
+        child: Container(
+          margin: EdgeInsets.only(top: 15.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _materiaName(),
+              SizedBox(height: 2.0),
+              _matriculamateria(),
+              SizedBox(height: 2.0),
+              _semestremateria(),
+              DividerLine(
+                width: MediaQuery.of(context).size.width * 0.65,
+                color: Colors.white,
+              ),
+            ],
+          ),
         ));
   }
 

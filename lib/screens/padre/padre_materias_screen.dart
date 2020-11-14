@@ -56,36 +56,27 @@ class _PadreMateriasScreenState extends State<PadreMateriasScreen> {
 
   Widget _body() {
     return Column(
-      children: [_bannerDescriptivo(), _materiasColumn(context)],
+      children: [
+        _bannerDescriptivo(),
+        _materiasColumn(context),
+      ],
     );
   }
 
   Widget _bannerDescriptivo() {
     return Container(
-      height: 90.0,
       width: double.infinity,
+      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20.0),
+      margin: EdgeInsets.only(bottom: 8.0),
       decoration: BoxDecoration(
         color: Colors.white,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-              padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width / 15,
-                  top: MediaQuery.of(context).size.width / 20),
-              child: _hijoName()),
-          Padding(
-              padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width / 15,
-                  top: MediaQuery.of(context).size.width / 60),
-              child: _matriculaHijo()),
-          Padding(
-            padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width / 15,
-                top: MediaQuery.of(context).size.width / 60),
-            child: _semestreHijo(),
-          ),
+          _hijoName(),
+          _matriculaHijo(),
+          _semestreHijo(),
         ],
       ),
     );
@@ -93,42 +84,37 @@ class _PadreMateriasScreenState extends State<PadreMateriasScreen> {
 
   Widget _materiasColumn(BuildContext context) {
     final mq = MediaQuery.of(context);
-    return Column(
-      children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-              color: kGreenPistache,
-              borderRadius: BorderRadius.only(
-                  topLeft: const Radius.circular(38.0),
-                  topRight: const Radius.circular(38.0))),
-          child: Container(
-            width: double.infinity,
-            height: mq.size.height - 170.0,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                SizedBox(height: mq.size.width / 10),
-                Padding(
-                    padding: EdgeInsets.only(left: mq.size.width / 10),
-                    child: TitleWidget(title: "Materias", color: kMainColor)),
-                Expanded(
-                  child: Container(
-                    child: SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: materias
-                            .map((e) => MateriaListItemWidget(materia: e))
-                            .toList(),
-                      ),
-                    ),
+    return Expanded(
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 40.0),
+        decoration: BoxDecoration(
+          color: kGreenPistache,
+          borderRadius: BorderRadius.only(
+            topLeft: const Radius.circular(38.0),
+            topRight: const Radius.circular(38.0),
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            TitleWidget(title: "Materias", color: kMainColor),
+            Expanded(
+              child: Container(
+                child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: materias
+                        .map((e) => MateriaListItemWidget(materia: e))
+                        .toList(),
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
-        )
-      ],
+          ],
+        ),
+      ),
     );
   }
 
@@ -170,7 +156,10 @@ class _PadreMateriasScreenState extends State<PadreMateriasScreen> {
     return Text(
       '${hijo.nombre} ${hijo.apellidoPaterno} ${hijo.apellidoMaterno}',
       style: TextStyle(
-          fontWeight: FontWeight.w400, fontSize: 16.0, color: kSecondaryColor),
+        fontWeight: FontWeight.bold,
+        fontSize: 16.0,
+        color: kSecondaryColor,
+      ),
     );
   }
 
@@ -210,7 +199,10 @@ class _PadreMateriasScreenState extends State<PadreMateriasScreen> {
     return Text(
       '$semestre Semestre',
       style: TextStyle(
-          fontWeight: FontWeight.w400, fontSize: 12.0, color: Colors.black),
+        fontWeight: FontWeight.w400,
+        fontSize: 12.0,
+        color: kDisableColor,
+      ),
     );
   }
 }

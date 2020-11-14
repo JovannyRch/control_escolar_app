@@ -17,44 +17,36 @@ class HijoListItemWidget extends StatelessWidget {
             MaterialPageRoute(builder: (context) => PadreMateriasScreen()),
           );
         },
-        child: Row(
-          children: [
-            Padding(
-              padding:
-                  EdgeInsets.only(left: MediaQuery.of(context).size.width / 10),
-              child: CircleAvatar(
-                  radius: 18.0,
-                  backgroundColor: Colors.transparent,
-                  child: Image.asset(hijo.img)),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                    padding: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width / 15,
-                        top: MediaQuery.of(context).size.width / 20),
-                    child: _hijoName()),
-                Padding(
-                    padding: EdgeInsets.only(
-                        left: MediaQuery.of(context).size.width / 15,
-                        top: MediaQuery.of(context).size.width / 60),
-                    child: _matriculaHijo()),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.width / 15,
-                      top: MediaQuery.of(context).size.width / 60),
-                  child: _semestreHijo(),
+        child: Container(
+          margin: EdgeInsets.only(top: 15.0),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 18.0,
+                backgroundColor: Colors.transparent,
+                child: Image.asset(hijo.img),
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _hijoName(),
+                    SizedBox(height: 2.0),
+                    _matriculaHijo(),
+                    SizedBox(height: 2.0),
+                    _semestreHijo(),
+                    /* IconButton(
+                        icon: Icon(Icons.more, color: kGreenPistache),
+                        onPressed: null), */
+                    DividerLine(
+                        width: MediaQuery.of(context).size.width * 0.65,
+                        color: Colors.white),
+                  ],
                 ),
-                /* IconButton(
-                    icon: Icon(Icons.more, color: kGreenPistache),
-                    onPressed: null), */
-                DividerLine(
-                    width: MediaQuery.of(context).size.width * 0.75,
-                    color: Colors.white),
-              ],
-            )
-          ],
+              )
+            ],
+          ),
         ));
   }
 
@@ -62,7 +54,10 @@ class HijoListItemWidget extends StatelessWidget {
     return Text(
       '${hijo.nombre} ${hijo.apellidoPaterno} ${hijo.apellidoMaterno}',
       style: TextStyle(
-          fontWeight: FontWeight.w400, fontSize: 16.0, color: kGreenPistache),
+        fontWeight: FontWeight.w400,
+        fontSize: 16.0,
+        color: kGreenPistache,
+      ),
     );
   }
 
@@ -70,7 +65,10 @@ class HijoListItemWidget extends StatelessWidget {
     return Text(
       'Matricula: ${hijo.matricula}',
       style: TextStyle(
-          fontWeight: FontWeight.w400, fontSize: 14.0, color: Colors.white),
+        fontWeight: FontWeight.w400,
+        fontSize: 14.0,
+        color: Colors.white,
+      ),
     );
   }
 
@@ -102,7 +100,10 @@ class HijoListItemWidget extends StatelessWidget {
     return Text(
       '$semestre Semestre',
       style: TextStyle(
-          fontWeight: FontWeight.w400, fontSize: 12.0, color: Colors.white),
+        fontWeight: FontWeight.w400,
+        fontSize: 12.0,
+        color: Colors.white,
+      ),
     );
   }
 }
