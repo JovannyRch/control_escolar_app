@@ -1,6 +1,7 @@
 import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/models/AlumnoModel.dart';
 import 'package:control_escolar/models/MateriaModel.dart';
+import 'package:control_escolar/widgets/CustomAppBar.dart';
 import 'package:control_escolar/widgets/MateriaListItemWidget.dart';
 import 'package:control_escolar/widgets/SideMenu.dart';
 import 'package:control_escolar/widgets/TitleWidget.dart';
@@ -43,13 +44,28 @@ class _PadreMateriasScreenState extends State<PadreMateriasScreen> {
       key: scaffoldKey,
       backgroundColor: Colors.white,
       endDrawer: SideMenu(),
-      appBar: AppBar(
+      appBar: CustomAppBar(
+          title: "Juan Michua Rojas",
+          subtitle: "Padre de familia",
+          actions: [
+            Container(
+              padding: EdgeInsets.only(right: 13.0),
+              child: IconButton(
+                icon: Icon(Icons.close),
+                color: Colors.black,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            )
+          ]),
+      /* AppBar(
         automaticallyImplyLeading: false,
         title: _titleAppbar(),
         elevation: 0,
         actions: [_menuIcon()],
         backgroundColor: kGreyColor,
-      ),
+      ), */
       body: _body(),
     );
   }

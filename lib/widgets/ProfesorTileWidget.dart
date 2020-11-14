@@ -20,7 +20,7 @@ class ProfesorTileWidget extends StatelessWidget {
             _profesorName(),
             _materiaName(),
             DividerLine(
-                width: MediaQuery.of(context).size.width * 0.75,
+                width: MediaQuery.of(context).size.width * 0.65,
                 color: Colors.black26),
           ],
         )

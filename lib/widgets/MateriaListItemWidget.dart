@@ -46,7 +46,7 @@ class MateriaListItemWidget extends StatelessWidget {
 
   Widget _matriculamateria() {
     return Text(
-      'Matricula: ${materia.nombreProfesor}',
+      'Maestro: ${materia.nombreProfesor}',
       style: TextStyle(
           fontWeight: FontWeight.w500, fontSize: 14.0, color: kSecondaryColor),
     );
