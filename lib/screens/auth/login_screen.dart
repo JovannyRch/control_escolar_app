@@ -1,5 +1,5 @@
 import 'package:control_escolar/const/const.dart';
-import 'package:control_escolar/screens/alumno/home_alumno_screen.dart';
+import 'package:control_escolar/helpers/token_helper.dart';
 import 'package:control_escolar/screens/auth/widgets/background_widget.dart';
 import 'package:control_escolar/screens/padre/home_padre_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +13,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   Size _size;
+
+  TextEditingController password = new TextEditingController();
+  TextEditingController username = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -147,5 +150,22 @@ class _LoginScreenState extends State<LoginScreen> {
       SizedBox(height: 16.0),
       name,
     ]);
+  }
+
+  //Handlers
+  void handleLogin() async {
+    //Focus.of(context).unfocus();
+    /* //final auth = Provider.of<AuthService>(context, listen: false);
+    //bool ok = await auth.login(username.text, password.text);
+    if (ok) {
+      //await saveToken(auth.token);
+      if (!auth.user.isPremium) {
+        Navigator.pushReplacementNamed(context, '/noPremium');
+      } else {
+        Navigator.pushReplacementNamed(context, '/home');
+      }
+    } else {
+      //final error = auth.error;
+    } */
   }
 }
