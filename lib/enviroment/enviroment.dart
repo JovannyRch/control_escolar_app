@@ -1,3 +1,3 @@
 class Enviroment {
-  static String apiUrl = "http://localhost:8000/api/auth/login";
+  static String apiUrl = "http://28ef1c7f0745.ngrok.io/api";
 }

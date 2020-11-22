@@ -1,8 +1,12 @@
 import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/helpers/token_helper.dart';
+import 'package:control_escolar/providers/auth_provider.dart';
+import 'package:control_escolar/screens/alumno/home_alumno_screen.dart';
 import 'package:control_escolar/screens/auth/widgets/background_widget.dart';
 import 'package:control_escolar/screens/padre/home_padre_screen.dart';
+import 'package:control_escolar/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -17,8 +21,13 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController password = new TextEditingController();
   TextEditingController username = new TextEditingController();
 
+  AuthProvider auth;
+  AuthService authService = new AuthService();
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
+    auth = Provider.of<AuthProvider>(context);
     _size = MediaQuery.of(context).size;
     return Scaffold(
       body: _scaffold(),
@@ -78,12 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
         ),
-        onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => HomePadreScreen()),
-          );
-        },
+        onPressed: handleLogin,
         color: kSecondaryColor,
         textColor: Colors.white,
         child: Text("Iniciar sesión".toUpperCase(),
@@ -154,18 +158,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   //Handlers
   void handleLogin() async {
-    //Focus.of(context).unfocus();
-    /* //final auth = Provider.of<AuthService>(context, listen: false);
-    //bool ok = await auth.login(username.text, password.text);
-    if (ok) {
-      //await saveToken(auth.token);
-      if (!auth.user.isPremium) {
-        Navigator.pushReplacementNamed(context, '/noPremium');
-      } else {
-        Navigator.pushReplacementNamed(context, '/home');
-      }
-    } else {
-      //final error = auth.error;
-    } */
+    /* Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => HomeAlumnoScreen()),
+    ); */
+
+    authService.login(username.text, password.text);
   }
 }

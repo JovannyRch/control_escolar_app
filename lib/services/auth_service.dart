@@ -15,13 +15,17 @@ class AuthService with ChangeNotifier {
 
   Future login(String email, String password) async {
     final data = {
-      'email': "test6@gmail.com",
+      'email': "jovannyrch@gmail.com",
       'password': "123qwe",
     };
+    /* final data = {
+      'email': "jovannyrch@gmail.com",
+      'password': "123qwe",
+    }; */
     return await action("${Enviroment.apiUrl}/auth/login", data);
   }
 
-  Future registration(String email, String name, String password) async {
+  Future signup(String email, String name, String password) async {
     final data = {
       'name': "name ",
       'email': "test100@gmail.com",
@@ -31,8 +35,10 @@ class AuthService with ChangeNotifier {
   }
 
   Future action(String url, Map<String, String> data) async {
+    print("request to $url");
     final resp = await http.post(url,
         body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
+    print(resp.body);
     if (resp.statusCode == 200) {
       AuthResponse response = AuthResponse.fromJson(jsonDecode(resp.body));
       user = response.user;
