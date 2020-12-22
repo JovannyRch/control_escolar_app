@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/providers/auth_provider.dart';
+import 'package:control_escolar/screens/alumno/home_alumno_screen.dart';
 import 'package:control_escolar/screens/auth/widgets/background_widget.dart';
 import 'package:control_escolar/services/auth_service.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   AuthProvider auth;
   AuthService authService = new AuthService();
-  bool isLoading = false;
+  bool isCheckingUser = false;
   BuildContext _globalContext;
 
   @override
@@ -74,8 +75,9 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           _authTitle(),
           SizedBox(height: 16.0),
-          _input("Número de Cuenta", Icons.person),
-          _input("Contraseña", Icons.lock, isPassword: true),
+          _input("Número de Cuenta", Icons.person, controller: this.username),
+          _input("Contraseña", Icons.lock,
+              isPassword: true, controller: this.password),
           _loginButton(),
         ],
       ),
@@ -89,16 +91,21 @@ class _LoginScreenState extends State<LoginScreen> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
         ),
-        onPressed: checkInputData,
+        onPressed: !isCheckingUser ? checkInputData : null,
         color: kSecondaryColor,
         textColor: Colors.white,
-        child: Text("Iniciar sesión".toUpperCase(),
-            style: TextStyle(fontSize: 14)),
+        child: !isCheckingUser
+            ? Text(
+                "Iniciar sesión".toUpperCase(),
+                style: TextStyle(fontSize: 14),
+              )
+            : CircularProgressIndicator(),
       ),
     );
   }
 
-  Widget _input(String text, IconData icon, {bool isPassword = false}) {
+  Widget _input(String text, IconData icon,
+      {bool isPassword = false, TextEditingController controller}) {
     return Container(
       margin: EdgeInsets.only(bottom: 14.0),
       decoration: BoxDecoration(
@@ -106,6 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
         borderRadius: BorderRadius.circular(4.0),
       ),
       child: TextField(
+        controller: controller,
         obscureText: isPassword,
         decoration: InputDecoration(
           prefixIcon: Icon(
@@ -176,12 +184,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
   //Handlers
   void handleLogin() async {
-    /* Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => HomeAlumnoScreen()),
-    ); */
-
-    authService.login(username.text, password.text);
+    setCheckingUser(true);
+    bool isUserValid = await authService.login(username.text, password.text);
+    if (isUserValid) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeAlumnoScreen()),
+      );
+    }
+    setCheckingUser(false);
   }
 
   void tryLogin() {
@@ -215,5 +226,11 @@ class _LoginScreenState extends State<LoginScreen> {
           context: _globalContext,
           message: "La contraseña no puede estar vacía");
     }
+  }
+
+  void setCheckingUser(bool value) {
+    setState(() {
+      isCheckingUser = value;
+    });
   }
 }

@@ -18,11 +18,8 @@ class AuthService with ChangeNotifier {
       'email': "jovannyrch@gmail.com",
       'password': "123qwe",
     };
-    /* final data = {
-      'email': "jovannyrch@gmail.com",
-      'password': "123qwe",
-    }; */
-    return await action("${Enviroment.apiUrl}/auth/login", data);
+    return await fetchDataAuthorization(
+        "${Enviroment.apiUrl}/auth/login", data);
   }
 
   Future signup(String email, String name, String password) async {
@@ -31,18 +28,20 @@ class AuthService with ChangeNotifier {
       'email': "test100@gmail.com",
       'password': "123qwe",
     };
-    return await action("${Enviroment.apiUrl}/auth/register", data);
+    return await fetchDataAuthorization(
+        "${Enviroment.apiUrl}/auth/register", data);
   }
 
-  Future action(String url, Map<String, String> data) async {
-    print("request to $url");
+  Future fetchDataAuthorization(String url, Map<String, String> data) async {
     final resp = await http.post(url,
         body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
-    print(resp.body);
+
     if (resp.statusCode == 200) {
-      AuthResponse response = AuthResponse.fromJson(jsonDecode(resp.body));
+      final responseInJson = jsonDecode(resp.body);
+      print("Json response: $responseInJson");
+      AuthResponse response = AuthResponse.fromJson(responseInJson);
       user = response.user;
-      token = response.access_token;
+      token = response.accessToken;
       notifyListeners();
       return true;
     } else {
