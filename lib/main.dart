@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
       child: MaterialApp(
-        //theme: ThemeData(primaryColor: kBaseColor),
+        theme: ThemeData(primaryColor: kGreyColor),
         debugShowCheckedModeBanner: false,
         title: 'Control Escolar',
         home: LoginScreen(),

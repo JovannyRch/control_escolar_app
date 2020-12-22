@@ -1,52 +1,51 @@
 import 'dart:convert';
 
 import 'package:control_escolar/enviroment/enviroment.dart';
+import 'package:control_escolar/providers/auth_provider.dart';
 import 'package:control_escolar/responses/auth_response.dart';
 import 'package:control_escolar/responses/error_response.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 enum ACTION { LOGIN, REGISTRATION }
 
-class AuthService with ChangeNotifier {
-  User user;
+class AuthService {
   ErrorResponse error;
-  String token;
+  AuthProvider authProvider;
 
-  Future login(String email, String password) async {
+  Future<AuthResponse> login(String email, String password) async {
     final data = {
-      'email': "jovannyrch@gmail.com",
-      'password': "123qwe",
+      'email': email,
+      'password': password,
     };
-    return await fetchDataAuthorization(
+    AuthResponse loginResponse = await fetchDataAuthorizationAndSaveUser(
         "${Enviroment.apiUrl}/auth/login", data);
+    return loginResponse;
   }
 
-  Future signup(String email, String name, String password) async {
+  Future<AuthResponse> signup(
+      String email, String name, String password) async {
     final data = {
-      'name': "name ",
+      'name': "name",
       'email': "test100@gmail.com",
       'password': "123qwe",
     };
-    return await fetchDataAuthorization(
+    AuthResponse signUpResponse = await fetchDataAuthorizationAndSaveUser(
         "${Enviroment.apiUrl}/auth/register", data);
+    return signUpResponse;
   }
 
-  Future fetchDataAuthorization(String url, Map<String, String> data) async {
+  Future<AuthResponse> fetchDataAuthorizationAndSaveUser(
+      String url, Map<String, String> data) async {
     final resp = await http.post(url,
         body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
 
     if (resp.statusCode == 200) {
       final responseInJson = jsonDecode(resp.body);
-      print("Json response: $responseInJson");
       AuthResponse response = AuthResponse.fromJson(responseInJson);
-      user = response.user;
-      token = response.accessToken;
-      notifyListeners();
-      return true;
+      return response;
     } else {
       error = ErrorResponse.fromJson(jsonDecode(resp.body));
-      return false;
+      return null;
     }
   }
 }

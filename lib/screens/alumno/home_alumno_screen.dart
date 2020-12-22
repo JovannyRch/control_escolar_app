@@ -1,4 +1,5 @@
 import 'package:control_escolar/const/const.dart';
+import 'package:control_escolar/providers/auth_provider.dart';
 import 'package:control_escolar/screens/alumno/alumno_asistencia_screen.dart';
 import 'package:control_escolar/screens/alumno/alumno_estudios_screen.dart';
 import 'package:control_escolar/screens/alumno/alumno_noticias_screen.dart';
@@ -6,6 +7,7 @@ import 'package:control_escolar/widgets/CustomAppBar.dart';
 import 'package:control_escolar/widgets/SideMenu.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class HomeAlumnoScreen extends StatefulWidget {
   HomeAlumnoScreen({Key key}) : super(key: key);
@@ -17,15 +19,18 @@ class HomeAlumnoScreen extends StatefulWidget {
 class _HomeAlumnoScreenState extends State<HomeAlumnoScreen> {
   int _currentIndex = 0;
   var scaffoldKey = GlobalKey<ScaffoldState>();
+  AuthProvider _authProvider;
 
   @override
   Widget build(BuildContext context) {
+    _authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Colors.white,
       endDrawer: SideMenu(),
       appBar: CustomAppBar(
-        title: "Jovanny Ramírez Chimal",
+        title:
+            "${_authProvider.user.nombre} ${_authProvider.user.paterno} ${_authProvider.user.materno}",
         subtitle: "Alumno",
         actions: [
           IconButton(

@@ -1,15 +1,25 @@
-import 'package:control_escolar/models/AppUser.dart';
+import 'package:control_escolar/models/User.dart';
 import 'package:flutter/material.dart';
 
 class AuthProvider with ChangeNotifier {
-  AppUser _user;
+  User _user;
+  String _token;
 
-  AppUser get user {
+  User get user {
     return _user;
   }
 
-  set user(AppUser user) {
+  String get token {
+    return _token;
+  }
+
+  set user(User user) {
     _user = user;
+    notifyListeners();
+  }
+
+  set token(String token) {
+    _token = token;
     notifyListeners();
   }
 }

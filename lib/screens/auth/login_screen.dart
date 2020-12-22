@@ -1,9 +1,12 @@
 import 'dart:ui';
 
 import 'package:control_escolar/const/const.dart';
+import 'package:control_escolar/models/User.dart';
 import 'package:control_escolar/providers/auth_provider.dart';
+import 'package:control_escolar/responses/auth_response.dart';
 import 'package:control_escolar/screens/alumno/home_alumno_screen.dart';
 import 'package:control_escolar/screens/auth/widgets/background_widget.dart';
+import 'package:control_escolar/screens/padre/home_padre_screen.dart';
 import 'package:control_escolar/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,9 +29,11 @@ class _LoginScreenState extends State<LoginScreen> {
   AuthService authService = new AuthService();
   bool isCheckingUser = false;
   BuildContext _globalContext;
+  AuthProvider authProvider;
 
   @override
   Widget build(BuildContext context) {
+    authProvider = Provider.of<AuthProvider>(context);
     _globalContext = context;
     auth = Provider.of<AuthProvider>(context);
     _size = MediaQuery.of(context).size;
@@ -185,14 +190,39 @@ class _LoginScreenState extends State<LoginScreen> {
   //Handlers
   void handleLogin() async {
     setCheckingUser(true);
-    bool isUserValid = await authService.login(username.text, password.text);
-    if (isUserValid) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomeAlumnoScreen()),
-      );
+    AuthResponse userFromDb =
+        await authService.login(username.text.trim(), password.text.trim());
+    if (userFromDb == null) {
+      showOkAlertDialog(
+          context: _globalContext,
+          message: "Usuario no encontrado, revise sus credenciales");
+    } else {
+      saveUser(userFromDb);
+      goHomeScreen(userFromDb);
     }
     setCheckingUser(false);
+  }
+
+  void saveUser(AuthResponse authResponse) {
+    authProvider.token = authResponse.accessToken;
+    authProvider.user = authResponse.user;
+  }
+
+  void goHomeScreen(AuthResponse authResponse) {
+    if (authResponse.user.role == UserRole.profesor) {
+      navigateTo(() => HomeAlumnoScreen());
+    } else if (authResponse.user.role == UserRole.alumno) {
+      navigateTo(() => HomeAlumnoScreen());
+    } else if (authResponse.user.role == UserRole.padre) {
+      navigateTo(() => HomePadreScreen());
+    }
+  }
+
+  void navigateTo(Function f) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => f()),
+    );
   }
 
   void tryLogin() {
@@ -200,6 +230,7 @@ class _LoginScreenState extends State<LoginScreen> {
       handleLogin();
     } catch (e) {
       showLoginErrorAlert();
+      setCheckingUser(false);
     }
   }
 
