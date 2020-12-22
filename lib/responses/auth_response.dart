@@ -8,20 +8,20 @@ String authResponseToJson(AuthResponse data) => json.encode(data.toJson());
 class AuthResponse {
   AuthResponse({
     this.user,
-    this.token,
+    this.access_token,
   });
 
   User user;
-  String token;
+  String access_token;
 
   factory AuthResponse.fromJson(Map<String, dynamic> json) => AuthResponse(
         user: User.fromJson(json["user"]),
-        token: json["token"],
+        access_token: json["access_token"],
       );
 
   Map<String, dynamic> toJson() => {
         "user": user.toJson(),
-        "token": token,
+        "access_token": access_token,
       };
 }
 
@@ -30,24 +30,23 @@ class User {
     this.id,
     this.createdAt,
     this.email,
-    this.name,
-    this.isPremium,
+    this.nombre,
     this.role,
   });
 
   int id;
   DateTime createdAt;
   String email;
-  String name;
-  bool isPremium;
+  String nombre;
+  String paterno;
+  String materno;
   String role;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         createdAt: DateTime.parse(json["createdAt"]),
         email: json["email"],
-        name: json["name"],
-        isPremium: json["isPremium"],
+        nombre: json["nombre"],
         role: json["role"],
       );
 
@@ -55,8 +54,7 @@ class User {
         "id": id,
         "createdAt": createdAt.toIso8601String(),
         "email": email,
-        "name": name,
-        "isPremium": isPremium,
+        "nombre": nombre,
         "role": role,
       };
 }

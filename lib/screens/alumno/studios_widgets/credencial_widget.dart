@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:control_escolar/const/const.dart';
@@ -20,17 +19,16 @@ class _CredencialWidgetState extends State<CredencialWidget> {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          stops: [
-            0.12,
-            1.0,
-          ],
-          colors: [
-            Color(0xFFF8F8F8),
-            Color(0xFF52DE97),
-          ],
-        ),
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [
+              0.12,
+              1.0,
+            ],
+            colors: [
+              Color(0xFFF8F8F8),
+              Color(0xFF52DE97),
+            ]),
       ),
       child: _cardContainer(),
     );

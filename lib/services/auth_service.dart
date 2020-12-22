@@ -42,7 +42,7 @@ class AuthService with ChangeNotifier {
     if (resp.statusCode == 200) {
       AuthResponse response = AuthResponse.fromJson(jsonDecode(resp.body));
       user = response.user;
-      token = response.token;
+      token = response.access_token;
       notifyListeners();
       return true;
     } else {

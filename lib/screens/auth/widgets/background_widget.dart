@@ -75,16 +75,17 @@ class _Curve2 extends CustomPainter {
         new Rect.fromCircle(center: Offset(size.width, 0), radius: 1800);
 
     final gradiants = new LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: [
-          Color(0xFF3C9D9B),
-          Colors.white,
-        ],
-        stops: [
-          0.15,
-          1.0,
-        ]);
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+        Color(0xFF3C9D9B),
+        Colors.white,
+      ],
+      stops: [
+        0.15,
+        1.0,
+      ],
+    );
 
     final paint = new Paint()..shader = gradiants.createShader(rect);
     paint.color = kSecondaryColor;

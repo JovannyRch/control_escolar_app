@@ -1,12 +1,12 @@
+import 'dart:ui';
+
 import 'package:control_escolar/const/const.dart';
-import 'package:control_escolar/helpers/token_helper.dart';
 import 'package:control_escolar/providers/auth_provider.dart';
-import 'package:control_escolar/screens/alumno/home_alumno_screen.dart';
 import 'package:control_escolar/screens/auth/widgets/background_widget.dart';
-import 'package:control_escolar/screens/padre/home_padre_screen.dart';
 import 'package:control_escolar/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key key}) : super(key: key);
@@ -24,9 +24,11 @@ class _LoginScreenState extends State<LoginScreen> {
   AuthProvider auth;
   AuthService authService = new AuthService();
   bool isLoading = false;
+  BuildContext _globalContext;
 
   @override
   Widget build(BuildContext context) {
+    _globalContext = context;
     auth = Provider.of<AuthProvider>(context);
     _size = MediaQuery.of(context).size;
     return Scaffold(
@@ -73,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
           _authTitle(),
           SizedBox(height: 16.0),
           _input("Número de Cuenta", Icons.person),
-          _input("Contraseña", Icons.lock),
+          _input("Contraseña", Icons.lock, isPassword: true),
           _loginButton(),
         ],
       ),
@@ -87,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
         ),
-        onPressed: handleLogin,
+        onPressed: checkInputData,
         color: kSecondaryColor,
         textColor: Colors.white,
         child: Text("Iniciar sesión".toUpperCase(),
@@ -96,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _input(String text, IconData icon) {
+  Widget _input(String text, IconData icon, {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.only(bottom: 14.0),
       decoration: BoxDecoration(
@@ -104,9 +106,25 @@ class _LoginScreenState extends State<LoginScreen> {
         borderRadius: BorderRadius.circular(4.0),
       ),
       child: TextField(
+        obscureText: isPassword,
         decoration: InputDecoration(
-          prefixIcon: Icon(icon),
+          prefixIcon: Icon(
+            icon,
+            color: kMainColor,
+          ),
           labelText: text,
+          labelStyle: TextStyle(
+            color: kMainColor,
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: kMainColor),
+          ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: kMainColor),
+          ),
+          border: UnderlineInputBorder(
+            borderSide: BorderSide(color: kMainColor),
+          ),
         ),
       ),
     );
@@ -164,5 +182,38 @@ class _LoginScreenState extends State<LoginScreen> {
     ); */
 
     authService.login(username.text, password.text);
+  }
+
+  void tryLogin() {
+    try {
+      handleLogin();
+    } catch (e) {
+      showLoginErrorAlert();
+    }
+  }
+
+  void showLoginErrorAlert() {
+    showOkAlertDialog(
+        context: _globalContext, message: "Ocurrió un error al hacer el login");
+  }
+
+  void checkInputData() {
+    if (this.password.text.isEmpty || this.username.text.isEmpty) {
+      this.showInvalidAlerts();
+    } else {
+      this.tryLogin();
+    }
+  }
+
+  void showInvalidAlerts() {
+    if (this.username.text.isEmpty) {
+      showOkAlertDialog(
+          context: _globalContext,
+          message: "Ingrese un nombre de usuario o correo inválido");
+    } else if (this.password.text.isEmpty) {
+      showOkAlertDialog(
+          context: _globalContext,
+          message: "La contraseña no puede estar vacía");
+    }
   }
 }
