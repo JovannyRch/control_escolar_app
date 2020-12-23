@@ -16,48 +16,6 @@ class AlumnoNoticiasScreen extends StatefulWidget {
 
 class _AlumnoNoticiasScreenState extends State<AlumnoNoticiasScreen> {
   List<NoticiaModel> noticias = [
-    NoticiaModel(
-      id: 1,
-      title: "Noticia 1",
-      description:
-          "Adipisicing qui id labore mollit laborum ipsum fugiat est sit proident duis magna eiusmod. Voluptate enim quis enim reprehenderit est labore id. Deserunt in aliqua laborum reprehenderit veniam irure magna ad. Id occaecat id anim mollit sit qui ad voluptate quis exercitation irure ullamco tempor id. Mollit sunt nulla fugiat sint aliquip consequat officia fugiat reprehenderit irure magna. Laboris laboris magna elit consectetur ea quis adipisicing anim id ex eu ad aliquip. Labore laborum aute in enim qui labore reprehenderit in nisi nisi nulla in et.",
-      content: "",
-    ),
-    NoticiaModel(
-      id: 1,
-      title: "Noticia 1",
-      description:
-          "Adipisicing qui id labore mollit laborum ipsum fugiat est sit proident duis magna eiusmod. Voluptate enim quis enim reprehenderit est labore id. Deserunt in aliqua laborum reprehenderit veniam irure magna ad. Id occaecat id anim mollit sit qui ad voluptate quis exercitation irure ullamco tempor id. Mollit sunt nulla fugiat sint aliquip consequat officia fugiat reprehenderit irure magna. Laboris laboris magna elit consectetur ea quis adipisicing anim id ex eu ad aliquip. Labore laborum aute in enim qui labore reprehenderit in nisi nisi nulla in et.",
-      content: "",
-    ),
-    NoticiaModel(
-      id: 1,
-      title: "Noticia 1",
-      description:
-          "Adipisicing qui id labore mollit laborum ipsum fugiat est sit proident duis magna eiusmod. Voluptate enim quis enim reprehenderit est labore id. Deserunt in aliqua laborum reprehenderit veniam irure magna ad. Id occaecat id anim mollit sit qui ad voluptate quis exercitation irure ullamco tempor id. Mollit sunt nulla fugiat sint aliquip consequat officia fugiat reprehenderit irure magna. Laboris laboris magna elit consectetur ea quis adipisicing anim id ex eu ad aliquip. Labore laborum aute in enim qui labore reprehenderit in nisi nisi nulla in et.",
-      content: "",
-    ),
-    NoticiaModel(
-      id: 1,
-      title: "Noticia 1",
-      description:
-          "Adipisicing qui id labore mollit laborum ipsum fugiat est sit proident duis magna eiusmod. Voluptate enim quis enim reprehenderit est labore id. Deserunt in aliqua laborum reprehenderit veniam irure magna ad. Id occaecat id anim mollit sit qui ad voluptate quis exercitation irure ullamco tempor id. Mollit sunt nulla fugiat sint aliquip consequat officia fugiat reprehenderit irure magna. Laboris laboris magna elit consectetur ea quis adipisicing anim id ex eu ad aliquip. Labore laborum aute in enim qui labore reprehenderit in nisi nisi nulla in et.",
-      content: "",
-    ),
-    NoticiaModel(
-      id: 1,
-      title: "Noticia 1",
-      description:
-          "Adipisicing qui id labore mollit laborum ipsum fugiat est sit proident duis magna eiusmod. Voluptate enim quis enim reprehenderit est labore id. Deserunt in aliqua laborum reprehenderit veniam irure magna ad. Id occaecat id anim mollit sit qui ad voluptate quis exercitation irure ullamco tempor id. Mollit sunt nulla fugiat sint aliquip consequat officia fugiat reprehenderit irure magna. Laboris laboris magna elit consectetur ea quis adipisicing anim id ex eu ad aliquip. Labore laborum aute in enim qui labore reprehenderit in nisi nisi nulla in et.",
-      content: "",
-    ),
-    NoticiaModel(
-      id: 1,
-      title: "Noticia 1",
-      description:
-          "Adipisicing qui id labore mollit laborum ipsum fugiat est sit proident duis magna eiusmod. Voluptate enim quis enim reprehenderit est labore id. Deserunt in aliqua laborum reprehenderit veniam irure magna ad. Id occaecat id anim mollit sit qui ad voluptate quis exercitation irure ullamco tempor id. Mollit sunt nulla fugiat sint aliquip consequat officia fugiat reprehenderit irure magna. Laboris laboris magna elit consectetur ea quis adipisicing anim id ex eu ad aliquip. Labore laborum aute in enim qui labore reprehenderit in nisi nisi nulla in et.",
-      content: "",
-    ),
   ];
 
   @override
@@ -167,7 +125,7 @@ class _AlumnoNoticiasScreenState extends State<AlumnoNoticiasScreen> {
             FaIcon(FontAwesomeIcons.newspaper, size: 64),
             SizedBox(height: 8),
             Text(
-              "No tienes noticias",
+              "No se encontraron noticias",
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 12.0,

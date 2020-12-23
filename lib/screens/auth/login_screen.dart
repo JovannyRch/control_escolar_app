@@ -8,11 +8,13 @@ import 'package:control_escolar/screens/alumno/home_alumno_screen.dart';
 import 'package:control_escolar/screens/auth/widgets/background_widget.dart';
 import 'package:control_escolar/screens/padre/home_padre_screen.dart';
 import 'package:control_escolar/services/auth_service.dart';
+import 'package:control_escolar/shared/user_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 
 class LoginScreen extends StatefulWidget {
+  static String routeName = "/login";
   LoginScreen({Key key}) : super(key: key);
 
   @override
@@ -30,6 +32,9 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isCheckingUser = false;
   BuildContext _globalContext;
   AuthProvider authProvider;
+  UserPrefrences userPrefrences = new UserPrefrences();
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -199,8 +204,16 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       saveUser(userFromDb);
       goHomeScreen(userFromDb);
+      storeDataUserInDevice(userFromDb);
     }
     setCheckingUser(false);
+  }
+
+  void storeDataUserInDevice(AuthResponse authResponse){
+      userPrefrences.email = authResponse.user.email;
+      userPrefrences.role = authResponse.user.role;
+      userPrefrences.userId = "${authResponse.user.id}";
+      userPrefrences.fullName = "${authResponse.user.nombre} ${authResponse.user.paterno} ${authResponse.user.materno}";
   }
 
   void saveUser(AuthResponse authResponse) {

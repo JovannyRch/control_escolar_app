@@ -3,6 +3,7 @@ import 'package:control_escolar/providers/auth_provider.dart';
 import 'package:control_escolar/screens/alumno/alumno_asistencia_screen.dart';
 import 'package:control_escolar/screens/alumno/alumno_estudios_screen.dart';
 import 'package:control_escolar/screens/alumno/alumno_noticias_screen.dart';
+import 'package:control_escolar/shared/user_preferences.dart';
 import 'package:control_escolar/widgets/CustomAppBar.dart';
 import 'package:control_escolar/widgets/SideMenu.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class HomeAlumnoScreen extends StatefulWidget {
+  static const routeName = '/homeAlumno';
   HomeAlumnoScreen({Key key}) : super(key: key);
 
   @override
@@ -17,9 +19,13 @@ class HomeAlumnoScreen extends StatefulWidget {
 }
 
 class _HomeAlumnoScreenState extends State<HomeAlumnoScreen> {
+
+
+
   int _currentIndex = 0;
   var scaffoldKey = GlobalKey<ScaffoldState>();
   AuthProvider _authProvider;
+  UserPrefrences userPrefrences = new UserPrefrences();
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +36,8 @@ class _HomeAlumnoScreenState extends State<HomeAlumnoScreen> {
       endDrawer: SideMenu(),
       appBar: CustomAppBar(
         title:
-            "${_authProvider.user.nombre} ${_authProvider.user.paterno} ${_authProvider.user.materno}",
-        subtitle: "Alumno",
+            userPrefrences.fullName,
+        subtitle: userPrefrences.role.toString(),
         actions: [
           IconButton(
             icon: Icon(Icons.menu, color: Colors.black),

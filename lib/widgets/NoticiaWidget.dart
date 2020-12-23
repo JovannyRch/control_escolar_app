@@ -66,7 +66,7 @@ class NoticiaWidget extends StatelessWidget {
   Widget _description() {
     return Container(
       child: Text(
-        noticia.description,
+        noticia.body,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontSize: 12.0,

@@ -22,4 +22,6 @@ class AuthProvider with ChangeNotifier {
     _token = token;
     notifyListeners();
   }
+
+  
 }
