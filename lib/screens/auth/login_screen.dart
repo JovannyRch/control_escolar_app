@@ -198,28 +198,22 @@ class _LoginScreenState extends State<LoginScreen> {
     AuthResponse userFromDb =
         await authService.login(username.text.trim(), password.text.trim());
     if (userFromDb == null) {
-      showOkAlertDialog(
-          context: _globalContext,
-          message: "Usuario no encontrado, revise sus credenciales");
+      showUserNotFoundMessage();
     } else {
-      saveUser(userFromDb);
+      authService.storeUserInDevice(userFromDb);
       goHomeScreen(userFromDb);
-      storeDataUserInDevice(userFromDb);
     }
     setCheckingUser(false);
   }
 
-  void storeDataUserInDevice(AuthResponse authResponse){
-      userPrefrences.email = authResponse.user.email;
-      userPrefrences.role = authResponse.user.role;
-      userPrefrences.userId = "${authResponse.user.id}";
-      userPrefrences.fullName = "${authResponse.user.nombre} ${authResponse.user.paterno} ${authResponse.user.materno}";
+  void showUserNotFoundMessage(){
+      showOkAlertDialog(
+          context: _globalContext,
+          message: "Usuario no encontrado, revise sus credenciales");
   }
 
-  void saveUser(AuthResponse authResponse) {
-    authProvider.token = authResponse.accessToken;
-    authProvider.user = authResponse.user;
-  }
+
+
 
   void goHomeScreen(AuthResponse authResponse) {
     if (authResponse.user.role == UserRole.profesor) {

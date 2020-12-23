@@ -8,7 +8,6 @@ import 'package:control_escolar/widgets/CustomAppBar.dart';
 import 'package:control_escolar/widgets/SideMenu.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 
 class HomeAlumnoScreen extends StatefulWidget {
   static const routeName = '/homeAlumno';
@@ -24,12 +23,12 @@ class _HomeAlumnoScreenState extends State<HomeAlumnoScreen> {
 
   int _currentIndex = 0;
   var scaffoldKey = GlobalKey<ScaffoldState>();
-  AuthProvider _authProvider;
+  
   UserPrefrences userPrefrences = new UserPrefrences();
 
   @override
   Widget build(BuildContext context) {
-    _authProvider = Provider.of<AuthProvider>(context);
+    
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Colors.white,

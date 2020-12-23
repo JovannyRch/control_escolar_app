@@ -4,6 +4,8 @@ import 'package:control_escolar/enviroment/enviroment.dart';
 import 'package:control_escolar/providers/auth_provider.dart';
 import 'package:control_escolar/responses/auth_response.dart';
 import 'package:control_escolar/responses/error_response.dart';
+import 'package:control_escolar/shared/user_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 enum ACTION { LOGIN, REGISTRATION }
@@ -11,6 +13,8 @@ enum ACTION { LOGIN, REGISTRATION }
 class AuthService {
   ErrorResponse error;
   AuthProvider authProvider;
+  UserPrefrences userPrefrences = new UserPrefrences();
+  final storage = new FlutterSecureStorage();
 
   Future<AuthResponse> login(String email, String password) async {
     final data = {
@@ -48,4 +52,20 @@ class AuthService {
       return null;
     }
   }
+
+  Future<void> storeUserInDevice(AuthResponse authResponse) async {
+    userPrefrences.email = authResponse.user.email;
+    userPrefrences.role = authResponse.user.role;
+    userPrefrences.userId = "${authResponse.user.id}";
+    userPrefrences.fullName = "${authResponse.user.nombre} ${authResponse.user.paterno} ${authResponse.user.materno}"; 
+    storeToken(authResponse.accessToken);
+  }
+
+  void storeToken(String token) async{
+    await storage.write(key: 'token', value: token); 
+  }
+
+  Future<String> getToken()async{
+      return await storage.read(key: 'token');
+  } 
 }
