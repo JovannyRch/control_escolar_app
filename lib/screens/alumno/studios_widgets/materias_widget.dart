@@ -1,5 +1,7 @@
 import 'package:control_escolar/const/const.dart';
+import 'package:control_escolar/models/ClasePreviewModel.dart';
 import 'package:control_escolar/models/MateriaModel.dart';
+import 'package:control_escolar/services/alumnos_services.dart';
 import 'package:control_escolar/widgets/DividerLine.dart';
 import 'package:control_escolar/widgets/MateriaCardWidget.dart';
 import 'package:control_escolar/widgets/ProfesorTileWidget.dart';
@@ -16,17 +18,28 @@ class MateriasWidget extends StatefulWidget {
 
 class _MateriasWidget extends State<MateriasWidget> {
   Size _size;
+  bool isFetching = false;
+  List<ClasePreviewModel> clases = [];
+  AlumnosService alumnosService = new AlumnosService();
 
-  List<MateriaCalificacionModel> calificaciones = [
-    MateriaCalificacionModel(
-        nombre: "Languaje de programación Orientada a Objetos",
-        calificacion: 9.9),
-    MateriaCalificacionModel(nombre: "Sistemas Operativos", calificacion: 4.9),
-    MateriaCalificacionModel(
-        nombre: "Tipos de Sistemas Operativos", calificacion: 5.9),
-    MateriaCalificacionModel(
-        nombre: "Lenguaje de programación visual", calificacion: 7.9),
-  ];
+  @override
+  void initState() {
+    // TODO: implement initState
+    fetchData();
+    super.initState();
+  }
+
+  void setFetching(bool val) {
+    setState(() {
+      isFetching = val;
+    });
+  }
+
+  void fetchData() async {
+    setFetching(true);
+    clases = await alumnosService.fetchClases();
+    setFetching(false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,12 +82,18 @@ class _MateriasWidget extends State<MateriasWidget> {
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
-        child: Row(
-          children: calificaciones
-              .map((c) => MateriaCalificacionCardWidget(materia: c))
-              .toList(),
-        ),
+        child: _renderMateriasOrLoading(),
       ),
+    );
+  }
+
+  Widget _renderMateriasOrLoading() {
+    if (isFetching) {
+      return Row(children: [CircularProgressIndicator()], mainAxisAlignment: MainAxisAlignment.center,);
+    }
+    return Row(
+      children:
+          clases.map((c) => MateriaCalificacionCardWidget(clase: c)).toList(),
     );
   }
 

@@ -1,13 +1,14 @@
 import 'package:control_escolar/const/const.dart';
+import 'package:control_escolar/models/ClasePreviewModel.dart';
 import 'package:control_escolar/models/MateriaModel.dart';
 import 'package:control_escolar/screens/alumno/screens/materia_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MateriaCalificacionCardWidget extends StatelessWidget {
-  final MateriaCalificacionModel materia;
+  final ClasePreviewModel clase;
 
-  MateriaCalificacionCardWidget({@required this.materia});
+  MateriaCalificacionCardWidget({@required this.clase});
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +76,7 @@ class MateriaCalificacionCardWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: 2.0),
       child: Text(
-        "Promedio: ${materia.calificacion}",
+        "Promedio: ${clase.promedio}",
         style: TextStyle(
           color: kMainColor,
           fontSize: 10.0,
@@ -90,7 +91,7 @@ class MateriaCalificacionCardWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: 9.0),
       child: Text(
-        materia.nombre,
+        clase.materia,
         style: TextStyle(
           fontSize: 11.0,
           fontWeight: FontWeight.w400,
