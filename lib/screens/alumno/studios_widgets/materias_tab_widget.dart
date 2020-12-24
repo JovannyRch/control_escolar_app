@@ -9,14 +9,14 @@ import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class MateriasWidget extends StatefulWidget {
-  MateriasWidget({Key key}) : super(key: key);
+class MateriasTabWidget extends StatefulWidget {
+  MateriasTabWidget({Key key}) : super(key: key);
 
   @override
-  _MateriasWidget createState() => _MateriasWidget();
+  _MateriasTabWidget createState() => _MateriasTabWidget();
 }
 
-class _MateriasWidget extends State<MateriasWidget> {
+class _MateriasTabWidget extends State<MateriasTabWidget> {
   Size _size;
   bool isFetching = false;
   List<ClasePreviewModel> clases = [];

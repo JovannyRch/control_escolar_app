@@ -4,14 +4,14 @@ import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class PlanesWidget extends StatefulWidget {
-  PlanesWidget({Key key}) : super(key: key);
+class PlanesTabWidget extends StatefulWidget {
+  PlanesTabWidget({Key key}) : super(key: key);
 
   @override
   _PlanesWidget createState() => _PlanesWidget();
 }
 
-class _PlanesWidget extends State<PlanesWidget> {
+class _PlanesWidget extends State<PlanesTabWidget> {
   Size _size;
 
   List<PlanEstudioModel> planes = [

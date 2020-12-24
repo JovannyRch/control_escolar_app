@@ -1,6 +1,6 @@
-final apiBaseUrl = "https://d26c263b05a6.ngrok.io";
+final apiBaseUrl = "https://ea500c92bb8f.ngrok.io";
 
 class Enviroment {
-  static String apiUrl = "${apiBaseUrl}/api";
-  static String apiAlumnoURL = "${apiBaseUrl}/api/alumno";
+  static String apiUrl = "$apiBaseUrl/api";
+  static String apiAlumnoURL = "$apiBaseUrl/api/alumno";
 }

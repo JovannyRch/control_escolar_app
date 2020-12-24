@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/models/NoticiaModel.dart';
 import 'package:control_escolar/services/noticias_service.dart';
+import 'package:control_escolar/widgets/LoaderWidget.dart';
 import 'package:control_escolar/widgets/NoticiaWidget.dart';
 import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
@@ -121,11 +122,7 @@ class _AlumnoNoticiasScreenState extends State<AlumnoNoticiasScreen> {
 
   Widget _showDataOrLoading() {
     if (isFetching) {
-      return Container(
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
+      return LoaderWidget();
     }
     return Container(
       child: noticias.length == 0 ? _empty() : _noticiaItems(),

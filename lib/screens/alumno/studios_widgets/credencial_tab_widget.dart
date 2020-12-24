@@ -4,14 +4,14 @@ import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/shared/user_preferences.dart';
 import 'package:flutter/material.dart';
 
-class CredencialWidget extends StatefulWidget {
-  CredencialWidget({Key key}) : super(key: key);
+class CredencialTabWidget extends StatefulWidget {
+  CredencialTabWidget({Key key}) : super(key: key);
 
   @override
-  _CredencialWidgetState createState() => _CredencialWidgetState();
+  _CredencialTabWidgetState createState() => _CredencialTabWidgetState();
 }
 
-class _CredencialWidgetState extends State<CredencialWidget> {
+class _CredencialTabWidgetState extends State<CredencialTabWidget> {
   Size _size;
   UserPrefrences userPrefrences = new UserPrefrences();
 

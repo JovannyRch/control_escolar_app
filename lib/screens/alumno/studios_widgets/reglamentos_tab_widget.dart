@@ -4,14 +4,14 @@ import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ReglamentosWidget extends StatefulWidget {
-  ReglamentosWidget({Key key}) : super(key: key);
+class ReglamentosTabWidget extends StatefulWidget {
+  ReglamentosTabWidget({Key key}) : super(key: key);
 
   @override
-  _ReglamentosWidget createState() => _ReglamentosWidget();
+  _ReglamentosTabWidget createState() => _ReglamentosTabWidget();
 }
 
-class _ReglamentosWidget extends State<ReglamentosWidget> {
+class _ReglamentosTabWidget extends State<ReglamentosTabWidget> {
   Size _size;
 
   List<PlanEstudioModel> planes = [

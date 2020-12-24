@@ -37,10 +37,10 @@ class _AlumnoEstudiosScreenState extends State<AlumnoEstudiosScreen> {
         ),
         body: TabBarView(
           children: [
-            CredencialWidget(),
-            MateriasWidget(),
-            PlanesWidget(),
-            ReglamentosWidget(),
+            CredencialTabWidget(),
+            MateriasTabWidget(),
+            PlanesTabWidget(),
+            ReglamentosTabWidget(),
           ],
         ),
       ),
