@@ -1,5 +1,5 @@
 import 'package:control_escolar/const/const.dart';
-import 'package:control_escolar/providers/auth_provider.dart';
+import 'package:control_escolar/helpers/global_helpers.dart';
 import 'package:control_escolar/screens/alumno/alumno_asistencia_screen.dart';
 import 'package:control_escolar/screens/alumno/alumno_estudios_screen.dart';
 import 'package:control_escolar/screens/alumno/alumno_noticias_screen.dart';
@@ -18,25 +18,20 @@ class HomeAlumnoScreen extends StatefulWidget {
 }
 
 class _HomeAlumnoScreenState extends State<HomeAlumnoScreen> {
-
-
-
   int _currentIndex = 0;
   var scaffoldKey = GlobalKey<ScaffoldState>();
-  
+
   UserPrefrences userPrefrences = new UserPrefrences();
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Colors.white,
       endDrawer: SideMenu(),
       appBar: CustomAppBar(
-        title:
-            userPrefrences.fullName,
-        subtitle: userPrefrences.role.toString(),
+        title: userPrefrences.fullName,
+        subtitle: formatRole(userPrefrences.role.toString()),
         actions: [
           IconButton(
             icon: Icon(Icons.menu, color: Colors.black),
