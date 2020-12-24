@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/models/NoticiaModel.dart';
+import 'package:control_escolar/services/noticias_service.dart';
 import 'package:control_escolar/widgets/NoticiaWidget.dart';
 import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +16,28 @@ class AlumnoNoticiasScreen extends StatefulWidget {
 }
 
 class _AlumnoNoticiasScreenState extends State<AlumnoNoticiasScreen> {
-  List<NoticiaModel> noticias = [
-  ];
+  List<NoticiaModel> noticias = [];
+  bool isFetching = true;
+  NoticiasService noticiasService = new NoticiasService();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchNoticias();
+  }
+
+  void fetchNoticias() async {
+    setFetching(true);
+    noticias = await noticiasService.fetchNoticias();
+    setFetching(false);
+  }
+
+  void setFetching(bool val) {
+    setState(() {
+      isFetching = val;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,22 +111,33 @@ class _AlumnoNoticiasScreenState extends State<AlumnoNoticiasScreen> {
             TitleWidget(title: "Noticias", color: kMainColor),
             SizedBox(height: 8.0),
             Expanded(
-              child: Container(
-                child: noticias.length == 0
-                    ? _empty()
-                    : SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: noticias
-                              .map((e) => NoticiaWidget(noticia: e))
-                              .toList(),
-                        ),
-                      ),
-              ),
+              child: _showDataOrLoading(),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _showDataOrLoading() {
+    if (isFetching) {
+      return Container(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+    return Container(
+      child: noticias.length == 0 ? _empty() : _noticiaItems(),
+    );
+  }
+
+  Widget _noticiaItems() {
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: noticias.map((e) => NoticiaWidget(noticia: e)).toList(),
       ),
     );
   }

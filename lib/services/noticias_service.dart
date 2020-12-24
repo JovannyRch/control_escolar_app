@@ -8,4 +8,12 @@ class NoticiasService {
 
 
 
+  Future<List<NoticiaModel>> fetchNoticias() async{
+    final resp = await api.get("/noticias");
+    if(resp == ""){
+      return []; 
+    }
+    List<NoticiaModel> data = noticiaModelFromJson(resp);
+    return data;
+  }
 }
