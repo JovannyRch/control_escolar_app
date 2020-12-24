@@ -24,7 +24,7 @@ class HijoListItemWidget extends StatelessWidget {
               CircleAvatar(
                 radius: 18.0,
                 backgroundColor: Colors.transparent,
-                child: Image.asset(hijo.img),
+                child: Image.asset(hijo.avatar),
               ),
               Container(
                 padding: EdgeInsets.only(left: 20),
@@ -52,7 +52,7 @@ class HijoListItemWidget extends StatelessWidget {
 
   Widget _hijoName() {
     return Text(
-      '${hijo.nombre} ${hijo.apellidoPaterno} ${hijo.apellidoMaterno}',
+      '${hijo.nombre} ${hijo.paterno} ${hijo.materno}',
       style: TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: 16.0,
@@ -63,7 +63,7 @@ class HijoListItemWidget extends StatelessWidget {
 
   Widget _matriculaHijo() {
     return Text(
-      'Matricula: ${hijo.matricula}',
+      'Matricula: ${hijo.cuenta}',
       style: TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: 14.0,
@@ -74,7 +74,7 @@ class HijoListItemWidget extends StatelessWidget {
 
   Widget _semestreHijo() {
     var semestre;
-    switch (hijo.semestre) {
+    switch (hijo.id) {
       case 1:
         semestre = 'Primer';
         break;

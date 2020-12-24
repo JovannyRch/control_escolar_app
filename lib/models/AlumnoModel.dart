@@ -1,18 +1,19 @@
 class AlumnoModel {
   int id;
   String nombre;
-  String apellidoPaterno;
-  String apellidoMaterno;
-  int matricula;
+  String paterno;
+  String materno;
+  int cuenta;
   int semestre;
-  String img;
+  String avatar;
 
-  AlumnoModel(
-      {this.id,
-      this.nombre,
-      this.apellidoPaterno,
-      this.apellidoMaterno,
-      this.matricula,
-      this.semestre,
-      this.img});
+  AlumnoModel({
+    this.id,
+    this.nombre,
+    this.paterno,
+    this.materno,
+    this.cuenta,
+    this.semestre,
+    this.avatar,
+  });
 }

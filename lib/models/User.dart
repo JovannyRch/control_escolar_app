@@ -5,13 +5,15 @@ class UserRole {
 }
 
 class User {
-  User(
-      {this.id,
-      this.email,
-      this.nombre,
-      this.role,
-      this.materno,
-      this.paterno});
+  User({
+    this.id,
+    this.email,
+    this.nombre,
+    this.role,
+    this.materno,
+    this.paterno,
+    this.cuenta,
+  });
 
   int id;
   String email;
@@ -19,6 +21,7 @@ class User {
   String paterno;
   String materno;
   String role;
+  String cuenta;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
@@ -27,6 +30,9 @@ class User {
         role: json["role"],
         materno: json['materno'],
         paterno: json['paterno'],
+        cuenta: json['cuenta'].toString().isNotEmpty
+            ? json['cuenta'].toString()
+            : "",
       );
 
   Map<String, dynamic> toJson() => {
@@ -35,6 +41,7 @@ class User {
         "nombre": nombre,
         "role": role,
         "materno": materno,
-        "paterno": paterno
+        "paterno": paterno,
+        "cuenta": cuenta
       };
 }

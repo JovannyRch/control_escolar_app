@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:control_escolar/const/const.dart';
+import 'package:control_escolar/shared/user_preferences.dart';
 import 'package:flutter/material.dart';
 
 class CredencialWidget extends StatefulWidget {
@@ -12,6 +13,7 @@ class CredencialWidget extends StatefulWidget {
 
 class _CredencialWidgetState extends State<CredencialWidget> {
   Size _size;
+  UserPrefrences userPrefrences = new UserPrefrences();
 
   @override
   Widget build(BuildContext context) {
@@ -84,10 +86,10 @@ class _CredencialWidgetState extends State<CredencialWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _titleField("Nombre del alumno"),
-        _valueField("Jovanny Ramírez Chimal"),
+        _valueField(userPrefrences.fullName),
         SizedBox(height: 8.0),
         _titleField("Número de cuenta"),
-        _valueField("1521004"),
+        _valueField(userPrefrences.cuenta),
         SizedBox(height: 18.0),
         _titleField("Carrera"),
         _valueField("Ingeniería en Computación"),

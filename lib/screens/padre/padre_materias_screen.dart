@@ -30,12 +30,12 @@ class _PadreMateriasScreenState extends State<PadreMateriasScreen> {
 
   AlumnoModel hijo = new AlumnoModel(
       id: 1,
-      apellidoMaterno: 'Perez',
-      apellidoPaterno: 'Ramirez',
+      materno: 'Perez',
+      paterno: 'Ramirez',
       nombre: 'Juan',
-      matricula: 1520934,
+      cuenta: 1520934,
       semestre: 1,
-      img: 'assets/images/icon-student.png');
+      avatar: 'assets/images/icon-student.png');
 
   @override
   Widget build(BuildContext context) {
@@ -170,7 +170,7 @@ class _PadreMateriasScreenState extends State<PadreMateriasScreen> {
 
   Widget _hijoName() {
     return Text(
-      '${hijo.nombre} ${hijo.apellidoPaterno} ${hijo.apellidoMaterno}',
+      '${hijo.nombre} ${hijo.paterno} ${hijo.materno}',
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 16.0,
@@ -181,7 +181,7 @@ class _PadreMateriasScreenState extends State<PadreMateriasScreen> {
 
   Widget _matriculaHijo() {
     return Text(
-      'Matricula: ${hijo.matricula}',
+      'Matricula: ${hijo.cuenta}',
       style: TextStyle(
           fontWeight: FontWeight.w400, fontSize: 14.0, color: Colors.black),
     );

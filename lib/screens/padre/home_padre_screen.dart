@@ -16,24 +16,7 @@ class HomePadreScreen extends StatefulWidget {
 
 class _HomePadreScreenState extends State<HomePadreScreen> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
-  List<AlumnoModel> hijos = [
-    AlumnoModel(
-        id: 1,
-        apellidoMaterno: 'Perez',
-        apellidoPaterno: 'Ramirez',
-        nombre: 'Juan',
-        matricula: 1520934,
-        semestre: 1,
-        img: 'assets/images/icon-student.png'),
-    AlumnoModel(
-        id: 1,
-        apellidoMaterno: 'Perez',
-        apellidoPaterno: 'Ramirez',
-        nombre: 'Martha',
-        matricula: 1520934,
-        semestre: 6,
-        img: 'assets/images/icon-student2.png')
-  ];
+  List<AlumnoModel> hijos = [];
 
   @override
   Widget build(BuildContext context) {

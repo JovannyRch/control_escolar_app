@@ -22,8 +22,8 @@ class UserPrefrences {
     return _prefs.getInt('token') ?? "";
   }
 
-  set token(String token) {
-    _prefs.setString('token', token);
+  set token(String val) {
+    _prefs.setString('token', val);
   }
 
   get isLogged {
@@ -38,27 +38,31 @@ class UserPrefrences {
     return _prefs.getString("userId") ?? '';
   }
 
-  set userId(String name) {
-    _prefs.setString('userId', name);
+  set userId(String val) {
+    _prefs.setString('userId', val);
   }
 
   get fullName {
     return _prefs.getString("fullName") ?? '';
   }
 
-  set fullName(String name) {
-    _prefs.setString('fullName', name);
+  set fullName(String val) {
+    _prefs.setString('fullName', val);
   }
 
-  
   get role {
     return _prefs.getString("role") ?? '';
   }
 
-  set role(String name) {
-    _prefs.setString('role', name);
+  set role(String val) {
+    _prefs.setString('role', val);
   }
-  
-  
-  
+
+  get cuenta {
+    return _prefs.getString("cuenta") ?? '';
+  }
+
+  set cuenta(String val) {
+    _prefs.setString('cuenta', val);
+  }
 }

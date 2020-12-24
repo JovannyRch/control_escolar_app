@@ -57,15 +57,17 @@ class AuthService {
     userPrefrences.email = authResponse.user.email;
     userPrefrences.role = authResponse.user.role;
     userPrefrences.userId = "${authResponse.user.id}";
-    userPrefrences.fullName = "${authResponse.user.nombre} ${authResponse.user.paterno} ${authResponse.user.materno}"; 
+    userPrefrences.fullName =
+        "${authResponse.user.nombre} ${authResponse.user.paterno} ${authResponse.user.materno}";
+    userPrefrences.cuenta = authResponse.user.cuenta;
     storeToken(authResponse.accessToken);
   }
 
-  void storeToken(String token) async{
-    await storage.write(key: 'token', value: token); 
+  void storeToken(String token) async {
+    await storage.write(key: 'token', value: token);
   }
 
-  Future<String> getToken()async{
-      return await storage.read(key: 'token');
-  } 
+  Future<String> getToken() async {
+    return await storage.read(key: 'token');
+  }
 }
