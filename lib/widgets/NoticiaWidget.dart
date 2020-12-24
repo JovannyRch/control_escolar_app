@@ -16,7 +16,11 @@ class NoticiaWidget extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => NoticiaDetailsScreen()),
+          MaterialPageRoute(
+            builder: (context) => NoticiaDetailsScreen(
+              noticia: noticia,
+            ),
+          ),
         );
       },
       child: Container(
