@@ -1,9 +1,11 @@
 import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/models/ApreciacionModel.dart';
 import 'package:control_escolar/models/PreguntaApreciacionModel.dart';
+import 'package:control_escolar/models/ProfesorPreviewModel.dart';
 import 'package:control_escolar/providers/app_state_provider.dart';
 import 'package:control_escolar/providers/apreciacion_provider.dart';
-import 'package:control_escolar/screens/alumno/screens/apreciacion/preguntas_apreciacio.dart';
+import 'package:control_escolar/screens/alumno/screens/apreciacion/preguntas_apreciacion.dart';
+import 'package:control_escolar/services/alumnos_services.dart';
 import 'package:control_escolar/services/apreciaciones_services.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -22,6 +24,7 @@ class _ApreciacionDetailsScreenState extends State<ApreciacionDetailsScreen> {
   AppStateProvider appStateProvider;
   ApreciacionProvider apreciacionProvider;
   ApreciacionesService apreciacionesService = new ApreciacionesService();
+  AlumnosService alumnosService = new AlumnosService();
   bool isLoadingApreciacionData = true;
 
   @override
@@ -44,6 +47,9 @@ class _ApreciacionDetailsScreenState extends State<ApreciacionDetailsScreen> {
     apreciacionProvider.preguntas = preguntas;
     apreciacionProvider.indexPreguntaActual = 0;
     apreciacionProvider.totalPreguntas = preguntas.length;
+    List<ProfesorPreviewModel> profesores =
+        await alumnosService.fetchProfesores();
+    apreciacionProvider.profesores = profesores;
     setIsLoadingApreciacionData(false);
   }
 

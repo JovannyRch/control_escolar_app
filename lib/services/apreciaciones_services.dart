@@ -16,7 +16,6 @@ class ApreciacionesService {
 
   Future<List<PreguntaApreciacionModel>> fetchPreguntas(
       int apreciacionId) async {
-    print("Ir por las preguntas $apreciacionId");
     final resp = await api.get("/apreciaciones/$apreciacionId/preguntas");
     if (resp == "") {
       return null;
