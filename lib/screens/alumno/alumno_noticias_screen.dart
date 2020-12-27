@@ -1,13 +1,18 @@
 import 'dart:ui';
 
 import 'package:control_escolar/const/const.dart';
+import 'package:control_escolar/models/ApreciacionModel.dart';
 import 'package:control_escolar/models/NoticiaModel.dart';
+import 'package:control_escolar/providers/app_state_provider.dart';
+import 'package:control_escolar/screens/alumno/screens/apreciacion/apreciacion_details_screen.dart';
+import 'package:control_escolar/services/apreciaciones_services.dart';
 import 'package:control_escolar/services/noticias_service.dart';
 import 'package:control_escolar/widgets/LoaderWidget.dart';
 import 'package:control_escolar/widgets/NoticiaWidget.dart';
 import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class AlumnoNoticiasScreen extends StatefulWidget {
   AlumnoNoticiasScreen({Key key}) : super(key: key);
@@ -20,12 +25,22 @@ class _AlumnoNoticiasScreenState extends State<AlumnoNoticiasScreen> {
   List<NoticiaModel> noticias = [];
   bool isFetching = true;
   NoticiasService noticiasService = new NoticiasService();
+  ApreciacionesService apreciacionesService = new ApreciacionesService();
+  ApreciacionModel apreciacion;
+  AppStateProvider appStateProvider;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    fetchApreciacionActiva();
     fetchNoticias();
+  }
+
+  void fetchApreciacionActiva() async {
+    apreciacion = await apreciacionesService.fetchApreciacionActiva();
+    if (apreciacion != null) {
+      appStateProvider.apreciacion = apreciacion;
+    }
   }
 
   void fetchNoticias() async {
@@ -42,7 +57,8 @@ class _AlumnoNoticiasScreenState extends State<AlumnoNoticiasScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //noticias = [];
+    appStateProvider = Provider.of<AppStateProvider>(context);
+
     return Column(
       children: [
         _bannerApreciacion(),
@@ -51,50 +67,66 @@ class _AlumnoNoticiasScreenState extends State<AlumnoNoticiasScreen> {
     );
   }
 
+  void goToApreciacionDetail() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) =>
+              ApreciacionDetailsScreen(apreciacion: apreciacion)),
+    );
+  }
+
   Widget _bannerApreciacion() {
-    return Container(
-      height: 80.0,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Color(0xFFF4F4F4),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Image.asset('assets/images/danger.png'),
-              Text(
-                "No olvides responder la apreciación estudiantil",
-                maxLines: 2,
-                style: TextStyle(
-                  fontSize: 14.0,
-                  fontWeight: FontWeight.w400,
+    if (apreciacion == null) {
+      return Container();
+    }
+
+    return GestureDetector(
+      onTap: goToApreciacionDetail,
+      child: Container(
+        height: 80.0,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Color(0xFFF4F4F4),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Image.asset('assets/images/danger.png'),
+                Text(
+                  "No olvides responder la apreciación estudiantil",
+                  maxLines: 2,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10.0,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                "Contestar",
-                style: TextStyle(
-                  color: kDangerColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+              ],
+            ),
+            SizedBox(
+              height: 10.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "Contestar",
+                  style: TextStyle(
+                    color: kDangerColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: 27.0,
-              )
-            ],
-          ),
-        ],
+                SizedBox(
+                  width: 27.0,
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -14,21 +14,21 @@ class ProfesorPreviewModel {
         this.profesorId,
         this.claseId,
         this.profesor,
-        this.nombre,
+        this.materia,
     });
 
     int materiaId;
     int profesorId;
     int claseId;
     String profesor;
-    String nombre;
+    String materia;
 
     factory ProfesorPreviewModel.fromJson(Map<String, dynamic> json) => ProfesorPreviewModel(
         materiaId: json["materia_id"],
         profesorId: json["profesor_id"],
         claseId: json["clase_id"],
         profesor: json["profesor"],
-        nombre: json["nombre"],
+        materia: json["materia"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -36,6 +36,6 @@ class ProfesorPreviewModel {
         "profesor_id": profesorId,
         "clase_id": claseId,
         "profesor": profesor,
-        "nombre": nombre,
+        "materia": materia,
     };
 }

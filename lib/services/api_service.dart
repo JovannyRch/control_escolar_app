@@ -43,6 +43,7 @@ class Api {
 
   Future<String> get(String url) async {
     final resp = await http.get(formatUrl(url), headers: await getHeaders());
+  
     if (resp.statusCode == 200) {
       return resp.body;
     } else {

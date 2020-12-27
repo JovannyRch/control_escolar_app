@@ -1,8 +1,11 @@
+import 'package:control_escolar/models/ProfesorPreviewModel.dart';
 import 'package:control_escolar/widgets/DividerLine.dart';
 import 'package:flutter/material.dart';
 
 class ProfesorTileWidget extends StatelessWidget {
-  const ProfesorTileWidget({Key key}) : super(key: key);
+  final ProfesorPreviewModel profesor;
+
+  ProfesorTileWidget({@required this.profesor});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,7 @@ class ProfesorTileWidget extends StatelessWidget {
 
   Widget _profesorName() {
     return Text(
-      "Francisco Chavez Castañeda",
+      profesor.profesor,
       style: TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: 13.0,
@@ -40,7 +43,7 @@ class ProfesorTileWidget extends StatelessWidget {
 
   Widget _materiaName() {
     return Text(
-      "Lenguaje de Programación Orientada a Objetos",
+      profesor.materia,
       style: TextStyle(
           fontWeight: FontWeight.w400, fontSize: 10.0, color: Colors.black54),
     );

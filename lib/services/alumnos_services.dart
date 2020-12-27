@@ -21,7 +21,7 @@ class AlumnosService {
 
 
   Future<List<ProfesorPreviewModel>> fetchProfesores() async{
-    final resp = await api.get("/clases");
+    final resp = await api.get("/profesores0");
     if(resp == ""){
       return []; 
     }

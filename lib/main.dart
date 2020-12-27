@@ -1,4 +1,6 @@
 import 'package:control_escolar/const/const.dart';
+import 'package:control_escolar/providers/app_state_provider.dart';
+import 'package:control_escolar/providers/apreciacion_provider.dart';
 import 'package:control_escolar/providers/auth_provider.dart';
 import 'package:control_escolar/routes/routes.dart';
 import 'package:control_escolar/screens/alumno/home_alumno_screen.dart';
@@ -24,12 +26,11 @@ void main() async {
   runApp(MyApp(initialRoute));
 }
 
-
-String getHomeName(String role){
-  if(role == "alumno"){
+String getHomeName(String role) {
+  if (role == "alumno") {
     return HomeAlumnoScreen.routeName;
   }
-  if(role == "padre"){
+  if (role == "padre") {
     return HomePadreScreen.routeName;
   }
   return LoginScreen.routeName;
@@ -43,6 +44,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => AppStateProvider()),
+        ChangeNotifierProvider(create: (_) => ApreciacionProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(primaryColor: kGreyColor),

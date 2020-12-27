@@ -1,8 +1,8 @@
 import 'package:control_escolar/const/const.dart';
-import 'package:control_escolar/screens/alumno/studios_widgets/credencial_widget.dart';
-import 'package:control_escolar/screens/alumno/studios_widgets/materias_widget.dart';
-import 'package:control_escolar/screens/alumno/studios_widgets/planes_widget.dart';
-import 'package:control_escolar/screens/alumno/studios_widgets/reglamentos_widget.dart';
+import 'package:control_escolar/screens/alumno/studios_widgets/credencial_tab_widget.dart';
+import 'package:control_escolar/screens/alumno/studios_widgets/materias_tab_widget.dart';
+import 'package:control_escolar/screens/alumno/studios_widgets/planes_tab_widget.dart';
+import 'package:control_escolar/screens/alumno/studios_widgets/reglamentos_tab_widget.dart';
 import 'package:flutter/material.dart';
 
 class AlumnoEstudiosScreen extends StatefulWidget {
