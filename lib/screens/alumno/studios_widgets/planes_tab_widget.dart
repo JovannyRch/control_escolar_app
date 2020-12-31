@@ -1,4 +1,5 @@
 import 'package:control_escolar/const/const.dart';
+import 'package:control_escolar/screens/alumno/studios_widgets/planes_detail_widget.dart';
 import 'package:control_escolar/widgets/DividerLine.dart';
 import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
@@ -16,20 +17,17 @@ class _PlanesWidget extends State<PlanesTabWidget> {
 
   List<PlanEstudioModel> planes = [
     PlanEstudioModel(
-        nombre: "Nombre del plan de estudio",
-        descripcion: "Descripcion del plan de estudio"),
+        id: 1, nombre: "Primer Semestre", descripcion: "7 Asisgnaturas"),
     PlanEstudioModel(
-        nombre: "Nombre del plan de estudio 1",
-        descripcion: "Descripcion del plan de estudio"),
+        id: 2, nombre: "Segundo Semestre", descripcion: "7 Asisgnaturas"),
     PlanEstudioModel(
-        nombre: "Nombre del plan de estudio 21",
-        descripcion: "Descripcion del plan de estudio"),
+        id: 3, nombre: "Tercer Semestre", descripcion: "8 Asisgnaturas"),
     PlanEstudioModel(
-        nombre: "Nombre del plan de estudio 101",
-        descripcion: "Descripcion del plan de estudio"),
+        id: 4, nombre: "Cuarto Semestre", descripcion: "8 Asisgnaturas"),
     PlanEstudioModel(
-        nombre: "Nombre del plan de estudio 200222",
-        descripcion: "Descripcion del plan de estudio"),
+        id: 5, nombre: "Quinto Semestre", descripcion: "10 Asisgnaturas"),
+    PlanEstudioModel(
+        id: 6, nombre: "Sexto Semestre", descripcion: "10 Asisgnaturas")
   ];
   @override
   Widget build(BuildContext context) {
@@ -56,51 +54,59 @@ class _PlanesWidget extends State<PlanesTabWidget> {
   }
 
   Widget _planTile(PlanEstudioModel plan) {
-    return Container(
-      height: 50.0,
-      width: double.infinity,
-      margin: EdgeInsets.only(bottom: 16.0),
-      decoration: BoxDecoration(),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          FaIcon(FontAwesomeIcons.book),
-          SizedBox(width: 16.0),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Container(
-                  width: _size.width * 0.7,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _nombrePlan(plan.nombre),
-                          SizedBox(height: 2.0),
-                          _descripcionPlan(plan.descripcion),
-                        ],
-                      ),
-                      SizedBox(width: 20.0),
-                      _downloadContainer(),
-                    ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PlanesDetailWidget(plan: plan)));
+      },
+      child: Container(
+        height: 50.0,
+        width: double.infinity,
+        margin: EdgeInsets.only(bottom: 16.0),
+        decoration: BoxDecoration(),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            FaIcon(FontAwesomeIcons.book),
+            SizedBox(width: 16.0),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Container(
+                    width: _size.width * 0.7,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            _nombrePlan(plan.nombre),
+                            SizedBox(height: 2.0),
+                            _descripcionPlan(plan.descripcion),
+                          ],
+                        ),
+                        SizedBox(width: 20.0),
+                        _viewContainer(),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              DividerLine(width: _size.width * 0.7, color: Colors.black26),
-            ],
-          ),
-        ],
+                DividerLine(width: _size.width * 0.7, color: Colors.black26),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _downloadContainer() {
+  Widget _viewContainer() {
     return Container(
       width: 28.0,
       height: 28.0,
@@ -110,7 +116,7 @@ class _PlanesWidget extends State<PlanesTabWidget> {
       ),
       child: Center(
         child: FaIcon(
-          FontAwesomeIcons.download,
+          FontAwesomeIcons.eye,
           size: 12,
           color: kSecondaryColor,
         ),
@@ -146,8 +152,9 @@ class _PlanesWidget extends State<PlanesTabWidget> {
 }
 
 class PlanEstudioModel {
+  int id;
   String nombre;
   String descripcion;
 
-  PlanEstudioModel({this.nombre, this.descripcion});
+  PlanEstudioModel({this.id, this.nombre, this.descripcion});
 }

@@ -28,8 +28,8 @@ class _AlumnoEstudiosScreenState extends State<AlumnoEstudiosScreen> {
             tabs: [
               Tab(text: "Credencial"),
               Tab(text: "Materias"),
-              Tab(text: "Planes"),
-              Tab(text: "Reglamentos"),
+              Tab(text: "Plan"),
+              Tab(text: "Reglamento"),
             ],
           ),
           toolbarHeight: 50.0,

@@ -2,6 +2,7 @@ import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/widgets/DividerLine.dart';
 import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ReglamentosTabWidget extends StatefulWidget {
@@ -13,6 +14,9 @@ class ReglamentosTabWidget extends StatefulWidget {
 
 class _ReglamentosTabWidget extends State<ReglamentosTabWidget> {
   Size _size;
+  String reglamentoUrl = 'assets/docs/Reglamento.pdf';
+  PDFDocument _doc;
+  bool _loading;
 
   List<PlanEstudioModel> planes = [
     PlanEstudioModel(
@@ -31,12 +35,36 @@ class _ReglamentosTabWidget extends State<ReglamentosTabWidget> {
         nombre: "Nombre del plan del reglamento 200222",
         descripcion: "Descripcion del reglamento"),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _initPdf();
+  }
+
+  _initPdf() async {
+    setState(() {
+      _loading = true;
+    });
+    final doc = await PDFDocument.fromAsset(reglamentoUrl);
+    setState(() {
+      _doc = doc;
+      _loading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     _size = MediaQuery.of(context).size;
-    return Container(
-      padding: EdgeInsets.only(right: 26, left: 26, top: 16),
-      child: Column(
+    return _loading
+        ? Center(
+            child: CircularProgressIndicator(
+              valueColor: new AlwaysStoppedAnimation<Color>(kMainColor),
+            ),
+          )
+        : PDFViewer(document: _doc, showPicker: false);
+
+    /* child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TitleWidget(title: "Reglamento", color: kMainColor),
@@ -51,8 +79,7 @@ class _ReglamentosTabWidget extends State<ReglamentosTabWidget> {
             ),
           )),
         ],
-      ),
-    );
+      ), */
   }
 
   Widget _planTile(PlanEstudioModel plan) {

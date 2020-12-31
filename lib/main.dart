@@ -21,6 +21,7 @@ void main() async {
     initialRoute = getHomeName(userPrefrences.role);
   } else {
     initialRoute = LoginScreen.routeName;
+    //initialRoute = HomeAlumnoScreen.routeName;
   }
 
   runApp(MyApp(initialRoute));
