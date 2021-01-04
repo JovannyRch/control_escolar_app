@@ -7,6 +7,7 @@ import 'package:control_escolar/screens/alumno/home_alumno_screen.dart';
 import 'package:control_escolar/screens/auth/login_screen.dart';
 import 'package:control_escolar/screens/padre/home_padre_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:control_escolar/shared/user_preferences.dart';
 
@@ -49,7 +50,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ApreciacionProvider()),
       ],
       child: MaterialApp(
-        theme: ThemeData(primaryColor: kGreyColor),
+        theme: ThemeData(
+            primaryColor: kGreyColor, textTheme: GoogleFonts.robotoTextTheme()),
         debugShowCheckedModeBanner: false,
         title: 'Control Escolar',
         initialRoute: initialRoute,

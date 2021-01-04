@@ -20,6 +20,7 @@ dependencies:
   adaptive_dialog: ^0.9.3
   shared_preferences: ^0.5.12+4
   flutter_plugin_pdf_viewer: ^1.0.7
+  google_fonts: ^1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -31,3 +32,4 @@ flutter:
   assets:
     - assets/images/
     - assets/docs/
+    - assets/fonts/
