@@ -10,6 +10,7 @@ import 'package:control_escolar/screens/padre/home_padre_screen.dart';
 import 'package:control_escolar/services/auth_service.dart';
 import 'package:control_escolar/shared/user_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_button/loading_button.dart';
 import 'package:provider/provider.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 
@@ -33,8 +34,6 @@ class _LoginScreenState extends State<LoginScreen> {
   BuildContext _globalContext;
   AuthProvider authProvider;
   UserPrefrences userPrefrences = new UserPrefrences();
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -96,8 +95,20 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _loginButton() {
     return Container(
-      width: double.infinity,
-      child: RaisedButton(
+        color: Colors.transparent,
+        child: Center(
+          child: LoadingButton(
+            isLoading: isCheckingUser,
+            onPressed: !isCheckingUser ? checkInputData : null,
+            backgroundColor: kSecondaryColor,
+            child: Text(
+              "Iniciar Sesion",
+              style: TextStyle(color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        )
+        /* child: RaisedButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
         ),
@@ -110,8 +121,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: TextStyle(fontSize: 14),
               )
             : CircularProgressIndicator(),
-      ),
-    );
+      ), */
+        );
   }
 
   Widget _input(String text, IconData icon,
@@ -206,14 +217,11 @@ class _LoginScreenState extends State<LoginScreen> {
     setCheckingUser(false);
   }
 
-  void showUserNotFoundMessage(){
-      showOkAlertDialog(
-          context: _globalContext,
-          message: "Usuario no encontrado, revise sus credenciales");
+  void showUserNotFoundMessage() {
+    showOkAlertDialog(
+        context: _globalContext,
+        message: "Usuario no encontrado, revise sus credenciales");
   }
-
-
-
 
   void goHomeScreen(AuthResponse authResponse) {
     if (authResponse.user.role == UserRole.profesor) {
