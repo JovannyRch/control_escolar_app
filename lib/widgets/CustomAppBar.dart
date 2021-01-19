@@ -5,6 +5,8 @@ Widget CustomAppBar({
   @required String title,
   String subtitle = "",
   List<Widget> actions = const [],
+  Widget leading = null,
+  TabBar tabs,
 }) {
   return AppBar(
     automaticallyImplyLeading: false,
@@ -13,6 +15,8 @@ Widget CustomAppBar({
     actions: [
       ...actions,
     ],
+    leading: leading,
+    bottom: tabs,
   );
 }
 
