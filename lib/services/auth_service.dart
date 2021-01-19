@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:control_escolar/enviroment/enviroment.dart';
+import 'package:control_escolar/models/User.dart';
 import 'package:control_escolar/providers/auth_provider.dart';
 import 'package:control_escolar/responses/auth_response.dart';
 import 'package:control_escolar/responses/error_response.dart';
@@ -16,7 +17,11 @@ class AuthService {
   UserPrefrences userPrefrences = new UserPrefrences();
   final storage = new FlutterSecureStorage();
 
-  Future<AuthResponse> login(String email, String password) async {
+  Future<AuthResponse> login(String email, String password,{bool isTesting = false}) async {
+    if(isTesting){
+      return mockTeacherUser();
+    }
+    
     final data = {
       'email': email,
       'password': password,
@@ -24,6 +29,11 @@ class AuthService {
     AuthResponse loginResponse = await fetchDataAuthorizationAndSaveUser(
         "${Enviroment.apiUrl}/auth/login", data);
     return loginResponse;
+  }
+
+  AuthResponse mockTeacherUser() {
+    User user = new User(id: 1,email: "profesor1@gmail.com",role: "profesor",materno: "materno",paterno: "paterno", cuenta: "1521004", nombre: "Profesor");
+    return new AuthResponse(user: user, accessToken: "123asd");
   }
 
   Future<AuthResponse> signup(

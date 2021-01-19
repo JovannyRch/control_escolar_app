@@ -1,4 +1,5 @@
 import 'package:control_escolar/const/const.dart';
+import 'package:control_escolar/models/ClasePreviewModel.dart';
 import 'package:control_escolar/widgets/CustomAppBar.dart';
 import 'package:control_escolar/widgets/ProfesorTileWidget.dart';
 import 'package:control_escolar/widgets/TitleWidget.dart';
@@ -6,6 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MateriaDetailsScreen extends StatefulWidget {
+  final ClasePreviewModel clase;
+
+  MateriaDetailsScreen({@required this.clase});
+
   @override
   _MateriaDetailsScreenState createState() => _MateriaDetailsScreenState();
 }
@@ -14,21 +19,18 @@ class _MateriaDetailsScreenState extends State<MateriaDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-          title: "Programacion Orientada a Objetos",
-          subtitle: "",
-          actions: [
-            Container(
-              padding: EdgeInsets.only(right: 13.0),
-              child: IconButton(
-                icon: Icon(Icons.close),
-                color: Colors.black,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            )
-          ]),
+      appBar: CustomAppBar(title: widget.clase.materia, subtitle: "", actions: [
+        Container(
+          padding: EdgeInsets.only(right: 13.0),
+          child: IconButton(
+            icon: Icon(Icons.close),
+            color: Colors.black,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        )
+      ]),
       body: Container(
         padding: EdgeInsets.symmetric(
           horizontal: 20,
@@ -39,7 +41,7 @@ class _MateriaDetailsScreenState extends State<MateriaDetailsScreen> {
           children: [
             TitleWidget(title: "Docente", color: kMainColor),
             SizedBox(height: 5.0),
-            ProfesorTileWidget(),
+            ProfesorTileWidget(nombreProfesor: widget.clase.profesor),
             SizedBox(height: 25.0),
             TitleWidget(title: "Calificaciones", color: kMainColor),
             SizedBox(height: 15.0),

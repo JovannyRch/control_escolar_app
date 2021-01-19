@@ -1,11 +1,11 @@
-import 'package:control_escolar/models/ProfesorPreviewModel.dart';
 import 'package:control_escolar/widgets/DividerLine.dart';
 import 'package:flutter/material.dart';
 
 class ProfesorTileWidget extends StatelessWidget {
-  final ProfesorPreviewModel profesor;
+  final String nombreProfesor;
+  final String nombreMateria;
 
-  ProfesorTileWidget({@required this.profesor});
+  ProfesorTileWidget({@required this.nombreProfesor, this.nombreMateria = ""});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +22,11 @@ class ProfesorTileWidget extends StatelessWidget {
           children: [
             _profesorName(),
             _materiaName(),
-            DividerLine(
-                width: MediaQuery.of(context).size.width * 0.65,
-                color: Colors.black26),
+            this.nombreMateria.isEmpty
+                ? Container()
+                : DividerLine(
+                    width: MediaQuery.of(context).size.width * 0.65,
+                    color: Colors.black26),
           ],
         )
       ],
@@ -33,7 +35,7 @@ class ProfesorTileWidget extends StatelessWidget {
 
   Widget _profesorName() {
     return Text(
-      profesor.profesor,
+      nombreProfesor,
       style: TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: 13.0,
@@ -42,8 +44,11 @@ class ProfesorTileWidget extends StatelessWidget {
   }
 
   Widget _materiaName() {
+    if (nombreMateria.isEmpty) {
+      return Container();
+    }
     return Text(
-      profesor.materia,
+      nombreMateria,
       style: TextStyle(
           fontWeight: FontWeight.w400, fontSize: 10.0, color: Colors.black54),
     );

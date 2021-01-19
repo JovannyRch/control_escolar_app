@@ -1,3 +1,4 @@
+import 'package:control_escolar/models/ClasePreviewModel.dart';
 import 'package:control_escolar/models/PreguntaApreciacionModel.dart';
 import 'package:control_escolar/models/ProfesorPreviewModel.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 class ApreciacionProvider with ChangeNotifier {
   List<PreguntaApreciacionModel> _preguntas;
   List<ProfesorPreviewModel> _profesores;
+  List<ClasePreviewModel> _clases;
   int _indexPreguntaActual;
   int _totalPreguntas;
 
@@ -23,6 +25,15 @@ class ApreciacionProvider with ChangeNotifier {
 
   set profesores(List<ProfesorPreviewModel> profesores) {
     _profesores = profesores;
+    notifyListeners();
+  }
+
+  List<ClasePreviewModel> get clases {
+    return _clases;
+  }
+
+  set clases(List<ClasePreviewModel> clases) {
+    _clases = clases;
     notifyListeners();
   }
 

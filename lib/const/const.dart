@@ -18,3 +18,6 @@ final kTextMainStyle = TextStyle(
 final kSecondaryTextColor = Color(0xFF868491);
 
 final double pi = 3.1415926535897932;
+
+
+const IS_TESTING = true;

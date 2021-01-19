@@ -5,6 +5,9 @@ import 'package:control_escolar/models/User.dart';
 import 'package:control_escolar/providers/auth_provider.dart';
 import 'package:control_escolar/responses/auth_response.dart';
 import 'package:control_escolar/screens/alumno/home_alumno_screen.dart';
+import 'package:control_escolar/screens/profesor/home_profesor_screen.dart';
+
+
 import 'package:control_escolar/screens/auth/widgets/background_widget.dart';
 import 'package:control_escolar/screens/padre/home_padre_screen.dart';
 import 'package:control_escolar/services/auth_service.dart';
@@ -195,8 +198,10 @@ class _LoginScreenState extends State<LoginScreen> {
   //Handlers
   void handleLogin() async {
     setCheckingUser(true);
+    
     AuthResponse userFromDb =
-        await authService.login(username.text.trim(), password.text.trim());
+        await authService.login(username.text.trim(), password.text.trim(), isTesting: IS_TESTING);
+
     if (userFromDb == null) {
       showUserNotFoundMessage();
     } else {
@@ -217,7 +222,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void goHomeScreen(AuthResponse authResponse) {
     if (authResponse.user.role == UserRole.profesor) {
-      navigateTo(() => HomeAlumnoScreen());
+      navigateTo(() => HomeProfesorScreen());
     } else if (authResponse.user.role == UserRole.alumno) {
       navigateTo(() => HomeAlumnoScreen());
     } else if (authResponse.user.role == UserRole.padre) {
@@ -247,7 +252,8 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void checkInputData() {
-    if (this.password.text.isEmpty || this.username.text.isEmpty) {
+    
+    if ((this.password.text.isEmpty || this.username.text.isEmpty) && !IS_TESTING) {
       this.showInvalidAlerts();
     } else {
       this.tryLogin();

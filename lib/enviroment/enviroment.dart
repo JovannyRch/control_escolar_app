@@ -1,4 +1,4 @@
-final apiBaseUrl = "https://8a761cb9bcc3.ngrok.io";
+final apiBaseUrl = "https://0935c9ed4958.ngrok.io";
 
 class Enviroment {
   static String apiUrl = "$apiBaseUrl/api";

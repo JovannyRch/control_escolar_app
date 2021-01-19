@@ -1,6 +1,5 @@
 import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/widgets/DividerLine.dart';
-import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

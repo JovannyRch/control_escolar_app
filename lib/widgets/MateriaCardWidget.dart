@@ -1,6 +1,5 @@
 import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/models/ClasePreviewModel.dart';
-import 'package:control_escolar/models/MateriaModel.dart';
 import 'package:control_escolar/screens/alumno/screens/materia_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -16,7 +15,8 @@ class MateriaCalificacionCardWidget extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MateriaDetailsScreen()),
+          MaterialPageRoute(
+              builder: (context) => MateriaDetailsScreen(clase: clase)),
         );
       },
       child: Container(

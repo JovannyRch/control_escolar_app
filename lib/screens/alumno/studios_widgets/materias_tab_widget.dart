@@ -1,15 +1,11 @@
 import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/models/ClasePreviewModel.dart';
-import 'package:control_escolar/models/MateriaModel.dart';
-import 'package:control_escolar/models/ProfesorPreviewModel.dart';
 import 'package:control_escolar/services/alumnos_services.dart';
-import 'package:control_escolar/widgets/DividerLine.dart';
 import 'package:control_escolar/widgets/LoaderWidget.dart';
 import 'package:control_escolar/widgets/MateriaCardWidget.dart';
 import 'package:control_escolar/widgets/ProfesorTileWidget.dart';
 import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MateriasTabWidget extends StatefulWidget {
   MateriasTabWidget({Key key}) : super(key: key);
@@ -21,16 +17,14 @@ class MateriasTabWidget extends StatefulWidget {
 class _MateriasTabWidget extends State<MateriasTabWidget> {
   Size _size;
   bool isFetchingClases = false;
-  bool isFetchingProfesores = false;
   List<ClasePreviewModel> clases = [];
-  List<ProfesorPreviewModel> profesores = [];
   AlumnosService alumnosService = new AlumnosService();
 
   @override
   void initState() {
     // TODO: implement initState
     fetchClases();
-    fetchProfesores();
+
     super.initState();
   }
 
@@ -40,22 +34,10 @@ class _MateriasTabWidget extends State<MateriasTabWidget> {
     });
   }
 
-  void setFetchingProfesores(bool val) {
-    setState(() {
-      isFetchingProfesores = val;
-    });
-  }
-
   void fetchClases() async {
     setFetchingClases(true);
     clases = await alumnosService.fetchClases();
     setFetchingClases(false);
-  }
-
-  void fetchProfesores() async {
-    setFetchingProfesores(true);
-    profesores = await alumnosService.fetchProfesores();
-    setFetchingProfesores(false);
   }
 
   @override
@@ -87,11 +69,13 @@ class _MateriasTabWidget extends State<MateriasTabWidget> {
   }
 
   Widget showItemsOrLoader() {
-    if (isFetchingProfesores) {
-      return LoaderWidget();
+    if (isFetchingClases) {
+      return Container(
+        width: double.infinity,
+        child: LoaderWidget(),
+      );
     }
-    return Column(
-        children: profesores.map((p) => _profesoreContainer(p)).toList());
+    return Column(children: clases.map((c) => _profesoreContainer(c)).toList());
   }
 
   //Materias container
@@ -108,10 +92,7 @@ class _MateriasTabWidget extends State<MateriasTabWidget> {
 
   Widget _renderMateriasOrLoading() {
     if (isFetchingClases) {
-      return Row(
-        children: [CircularProgressIndicator()],
-        mainAxisAlignment: MainAxisAlignment.center,
-      );
+      return LoaderWidget();
     }
     return Row(
       children:
@@ -120,10 +101,11 @@ class _MateriasTabWidget extends State<MateriasTabWidget> {
   }
 
   //Profesor container
-  Widget _profesoreContainer(ProfesorPreviewModel profesor) {
+  Widget _profesoreContainer(ClasePreviewModel clase) {
     return Container(
       margin: EdgeInsets.only(bottom: 14.0),
-      child: ProfesorTileWidget(profesor: profesor),
+      child: ProfesorTileWidget(
+          nombreProfesor: clase.profesor, nombreMateria: clase.materia),
     );
   }
 }
