@@ -2,6 +2,7 @@ import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/providers/app_state_provider.dart';
 import 'package:control_escolar/providers/apreciacion_provider.dart';
 import 'package:control_escolar/providers/auth_provider.dart';
+import 'package:control_escolar/providers/profesor_provider.dart';
 import 'package:control_escolar/routes/routes.dart';
 import 'package:control_escolar/screens/alumno/home_alumno_screen.dart';
 import 'package:control_escolar/screens/auth/login_screen.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => AppStateProvider()),
         ChangeNotifierProvider(create: (_) => ApreciacionProvider()),
+        ChangeNotifierProvider(create: (_) => ProfesorProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(

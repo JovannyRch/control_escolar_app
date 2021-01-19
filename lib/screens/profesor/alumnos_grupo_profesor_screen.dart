@@ -1,6 +1,9 @@
 import 'package:control_escolar/const/const.dart';
+import 'package:control_escolar/models/AlumnoModel.dart';
 import 'package:control_escolar/models/GruposMateriaModel.dart';
 import 'package:control_escolar/models/MateriaProfesorModel.dart';
+import 'package:control_escolar/screens/profesor/asistencias_tab.dart';
+import 'package:control_escolar/services/profesor_service.dart';
 import 'package:control_escolar/widgets/CustomAppBar.dart';
 import 'package:control_escolar/widgets/LoaderWidget.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +21,27 @@ class AlumnosProfesorScreen extends StatefulWidget {
 class _AlumnosProfesorScreenState extends State<AlumnosProfesorScreen> {
   bool isLoading = false;
   Size _size;
+  ProfesorService _service = new ProfesorService();
+
+  List<AlumnoModel> alumnos = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  void fetchData() async {
+    setIsLoading(true);
+    alumnos = await _service.fetchAlumnos(widget.grupo.id);
+    setIsLoading(false);
+  }
+
+  void setIsLoading(bool val) {
+    setState(() {
+      isLoading = val;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +80,7 @@ class _AlumnosProfesorScreenState extends State<AlumnosProfesorScreen> {
   Widget _body() {
     return TabBarView(
       children: [
-        Container(),
+        AsisTenciasTab(alumnos: alumnos,),
         Container(),
       ],
     );
@@ -75,7 +99,7 @@ class _AlumnosProfesorScreenState extends State<AlumnosProfesorScreen> {
     );
   }
 
-  Widget _renderGrupos() {
+  Widget _renderAlumnos() {
     if (isLoading) {
       return LoaderWidget.expanded(_size);
     }

@@ -1,4 +1,5 @@
 import 'package:control_escolar/const/const.dart';
+import 'package:control_escolar/models/AlumnoModel.dart';
 import 'package:control_escolar/models/ClasePreviewModel.dart';
 import 'package:control_escolar/models/GruposMateriaModel.dart';
 import 'package:control_escolar/models/MateriaProfesorModel.dart';
@@ -20,7 +21,16 @@ class ProfesorService {
 
   Future<List<GruposMateriaModel>> fetchGruposMateria(int materiaId) async {
     if (IS_TESTING) {
-    return await Mock.gruposPorMateriaProfesor();
+      return await Mock.gruposPorMateriaProfesor();
+    }
+
+    return [];
+    //TODO: Change endpoint
+  }
+
+  Future<List<AlumnoModel>> fetchAlumnos(int grupoId) async {
+    if (IS_TESTING) {
+      return await Mock.alumnos();
     }
 
     return [];

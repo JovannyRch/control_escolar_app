@@ -1,3 +1,4 @@
+import 'package:control_escolar/models/AlumnoModel.dart';
 import 'package:control_escolar/models/GruposMateriaModel.dart';
 import 'package:control_escolar/models/MateriaProfesorModel.dart';
 import 'package:control_escolar/models/User.dart';
@@ -45,6 +46,20 @@ class Mock {
       new GruposMateriaModel(id: 1, nombre: "Grupo a "),
       new GruposMateriaModel(id: 2, nombre: "Grupo b "),
       new GruposMateriaModel(id: 3, nombre: "Grupo c "),
+    ];
+  }
+
+  static Future<List<AlumnoModel>> alumnos() async {
+    await delay();
+    return [
+      new AlumnoModel(
+          id: 1, nombre: "alumno 1", paterno: "paterno", materno: "materno"),
+      new AlumnoModel(
+          id: 2, nombre: "alumno 2", paterno: "paterno", materno: "materno"),
+      new AlumnoModel(
+          id: 3, nombre: "alumno 3", paterno: "paterno", materno: "materno"),
+      new AlumnoModel(
+          id: 4, nombre: "alumno 4", paterno: "paterno", materno: "materno"),
     ];
   }
 }
