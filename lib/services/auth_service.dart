@@ -5,6 +5,7 @@ import 'package:control_escolar/models/User.dart';
 import 'package:control_escolar/providers/auth_provider.dart';
 import 'package:control_escolar/responses/auth_response.dart';
 import 'package:control_escolar/responses/error_response.dart';
+import 'package:control_escolar/services/mock_service.dart';
 import 'package:control_escolar/shared/user_preferences.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
@@ -19,7 +20,7 @@ class AuthService {
 
   Future<AuthResponse> login(String email, String password,{bool isTesting = false}) async {
     if(isTesting){
-      return mockTeacherUser();
+      return Mock.mockTeacherUser();
     }
     
     final data = {
@@ -31,10 +32,6 @@ class AuthService {
     return loginResponse;
   }
 
-  AuthResponse mockTeacherUser() {
-    User user = new User(id: 1,email: "profesor1@gmail.com",role: "profesor",materno: "materno",paterno: "paterno", cuenta: "1521004", nombre: "Profesor");
-    return new AuthResponse(user: user, accessToken: "123asd");
-  }
 
   Future<AuthResponse> signup(
       String email, String name, String password) async {
