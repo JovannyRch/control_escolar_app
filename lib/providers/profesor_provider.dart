@@ -1,4 +1,5 @@
 import 'package:control_escolar/models/AlumnoModel.dart';
+import 'package:control_escolar/models/AsistenciaModel.dart';
 import 'package:control_escolar/models/GruposMateriaModel.dart';
 import 'package:control_escolar/models/MateriaProfesorModel.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,8 @@ class ProfesorProvider with ChangeNotifier {
   List<AlumnoModel> _alumnos;
   MateriaProfesorModel _materia;
   GruposMateriaModel _grupo;
+
+  List<AsistenciaModel> _asistencias;
 
   bool _isLoadingMaterias = false;
   bool _isLoadingAlumnos = false;
@@ -18,6 +21,17 @@ class ProfesorProvider with ChangeNotifier {
 
   set alumnos(List<AlumnoModel> data) {
     _alumnos = data;
+    _asistencias = data.map((a) => new AsistenciaModel(alumno: a)).toList();
+    notifyListeners();
+  }
+
+  //Asistencias
+  List<AsistenciaModel> get asistencias {
+    return _asistencias;
+  }
+
+  set asistencias(List<AsistenciaModel> data) {
+    _asistencias = data;
     notifyListeners();
   }
 
@@ -65,6 +79,16 @@ class ProfesorProvider with ChangeNotifier {
 
   set isLoadingGrupos(bool val) {
     _isLoadingGrupos = val;
+    notifyListeners();
+  }
+
+  void updateAlumnoAsistenciaState(int alumnoId) {
+    _asistencias = _asistencias.map((a) {
+      if (a.alumno.id == alumnoId) {
+        a.siguienteEstado();
+      }
+      return a;
+    }).toList();
     notifyListeners();
   }
 }

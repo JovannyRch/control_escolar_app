@@ -1,6 +1,8 @@
 import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/models/AlumnoModel.dart';
+import 'package:control_escolar/models/AsistenciaModel.dart';
 import 'package:control_escolar/providers/profesor_provider.dart';
+import 'package:control_escolar/widgets/AsistenciaStateButton.dart';
 import 'package:control_escolar/widgets/LoaderWidget.dart';
 import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,7 @@ class AsisTenciasTab extends StatelessWidget {
   Widget build(BuildContext context) {
     _size = MediaQuery.of(context).size;
     _provider = Provider.of<ProfesorProvider>(context);
+    
 
     if (_provider.isLoadingAlumnos) {
       return LoaderWidget.expanded(_size);
@@ -61,14 +64,14 @@ class AsisTenciasTab extends StatelessWidget {
 
   Widget _renderAlumnos() {
     final List fixedList =
-        Iterable<int>.generate(_provider.alumnos.length).toList();
+        Iterable<int>.generate(_provider.asistencias.length).toList();
 
     return Container(
       child: SingleChildScrollView(
         child: Column(
           children: [
             ...fixedList
-                .map((index) => _alumnoTile(_provider.alumnos[index], index))
+                .map((index) => _asistenciaTile(_provider.asistencias[index], index))
                 .toList()
           ],
         ),
@@ -76,7 +79,7 @@ class AsisTenciasTab extends StatelessWidget {
     );
   }
 
-  Widget _alumnoTile(AlumnoModel alumno, int index) {
+  Widget _asistenciaTile(AsistenciaModel asistencia, int index) {
     return Container(
       height: 55.0,
       margin: EdgeInsets.only(bottom: 10.0),
@@ -105,7 +108,7 @@ class AsisTenciasTab extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "${alumno.paterno} ${alumno.materno} ${alumno.nombre}",
+                        "${asistencia.alumno.paterno} ${asistencia.alumno.materno} ${asistencia.alumno.nombre}",
                         style: TextStyle(
                           color: kMainColor,
                           fontWeight: FontWeight.w500,
@@ -115,12 +118,18 @@ class AsisTenciasTab extends StatelessWidget {
                   ),
                 ),
               ),
-              _input(),
+              AsistenciaStateButton(valorAsistencia: asistencia.asistencia, onTap: (){
+                handleOnTapAsistenciaState(asistencia);
+              },),
             ],
           ),
         ],
       ),
     );
+  }
+
+  void handleOnTapAsistenciaState(AsistenciaModel asistencia){
+    _provider.updateAlumnoAsistenciaState(asistencia.alumno.id);
   }
 
   Widget _numberIndicator(int number) {
