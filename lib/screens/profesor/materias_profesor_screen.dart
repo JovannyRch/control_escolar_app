@@ -15,7 +15,7 @@ class _MateriasProfesorState extends State<MateriasProfesor> {
   ProfesorService _service = new ProfesorService();
   List<MateriaProfesorModel> materias = [];
   bool isLoading = false;
-
+  
   Size _size;
 
   @override
@@ -24,6 +24,7 @@ class _MateriasProfesorState extends State<MateriasProfesor> {
     this.fetchMaterias();
     super.initState();
   }
+
 
 
   void fetchMaterias() async {
@@ -41,7 +42,7 @@ class _MateriasProfesorState extends State<MateriasProfesor> {
 
   @override
   Widget build(BuildContext context) {
-    
+
     _size = MediaQuery.of(context).size;
 
     return Container(

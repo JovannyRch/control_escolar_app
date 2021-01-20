@@ -1,11 +1,11 @@
 import 'package:control_escolar/models/AlumnoModel.dart';
 import 'package:control_escolar/models/GruposMateriaModel.dart';
-import 'package:control_escolar/widgets/MateriaPreviewProfesor.dart';
+import 'package:control_escolar/models/MateriaProfesorModel.dart';
 import 'package:flutter/material.dart';
 
 class ProfesorProvider with ChangeNotifier {
-  List<AlumnoModel> _alumnos = [];
-  MateriaPreviewProfesor _materia;
+  List<AlumnoModel> _alumnos;
+  MateriaProfesorModel _materia;
   GruposMateriaModel _grupo;
 
   bool _isLoadingMaterias = false;
@@ -22,11 +22,11 @@ class ProfesorProvider with ChangeNotifier {
   }
 
   //materia
-  MateriaPreviewProfesor get materia {
+  MateriaProfesorModel get materia {
     return _materia;
   }
 
-  set materia(MateriaPreviewProfesor data) {
+  set materia(MateriaProfesorModel data) {
     _materia = data;
     notifyListeners();
   }

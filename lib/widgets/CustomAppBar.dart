@@ -27,6 +27,7 @@ Widget _titleAppbar(String title, String subtitle) {
     children: [
       Text(
         title,
+        overflow: TextOverflow.ellipsis,
         style: TextStyle(
           color: Colors.black,
           fontWeight: FontWeight.bold,
@@ -37,6 +38,7 @@ Widget _titleAppbar(String title, String subtitle) {
           ? Container()
           : Text(
               subtitle,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 color: kDisableColor,
                 fontWeight: FontWeight.w300,

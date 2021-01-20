@@ -2,11 +2,13 @@ import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/models/AlumnoModel.dart';
 import 'package:control_escolar/models/GruposMateriaModel.dart';
 import 'package:control_escolar/models/MateriaProfesorModel.dart';
+import 'package:control_escolar/providers/profesor_provider.dart';
 import 'package:control_escolar/screens/profesor/asistencias_tab.dart';
 import 'package:control_escolar/services/profesor_service.dart';
 import 'package:control_escolar/widgets/CustomAppBar.dart';
 import 'package:control_escolar/widgets/LoaderWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AlumnosProfesorScreen extends StatefulWidget {
   final GruposMateriaModel grupo;
@@ -19,28 +21,30 @@ class AlumnosProfesorScreen extends StatefulWidget {
 }
 
 class _AlumnosProfesorScreenState extends State<AlumnosProfesorScreen> {
-  bool isLoading = false;
   Size _size;
   ProfesorService _service = new ProfesorService();
+  ProfesorProvider _provider;
 
-  List<AlumnoModel> alumnos = [];
+  List<AlumnoModel> alumnos;
 
   @override
   void initState() {
     // TODO: implement initState
+
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _provider = context.read<ProfesorProvider>();
+      _provider.materia = widget.materia;
+      this.fetchData();
+    });
   }
 
   void fetchData() async {
-    setIsLoading(true);
+    _provider.isLoadingAlumnos = true;
     alumnos = await _service.fetchAlumnos(widget.grupo.id);
-    setIsLoading(false);
-  }
-
-  void setIsLoading(bool val) {
-    setState(() {
-      isLoading = val;
-    });
+    _provider.alumnos = alumnos;
+    _provider.isLoadingAlumnos = false;
   }
 
   @override
@@ -51,7 +55,11 @@ class _AlumnosProfesorScreenState extends State<AlumnosProfesorScreen> {
       length: 2,
       child: Scaffold(
         appBar: CustomAppBar(
-            title: widget.grupo.nombre, leading: _backIcon(), tabs: _tabs()),
+          title: "${widget.grupo.nombre}",
+          leading: _backIcon(),
+          tabs: _tabs(),
+          subtitle: "${widget.materia.nombre}"
+        ),
         body: _body(),
       ),
     );
@@ -80,31 +88,9 @@ class _AlumnosProfesorScreenState extends State<AlumnosProfesorScreen> {
   Widget _body() {
     return TabBarView(
       children: [
-        AsisTenciasTab(alumnos: alumnos,),
+        AsisTenciasTab(),
         Container(),
       ],
-    );
-  }
-
-  Widget _materiaInfo() {
-    return Container(
-      child: Text(
-        "${widget.materia.nombre}",
-        style: TextStyle(
-          fontWeight: FontWeight.w300,
-          color: kMainColor,
-          fontSize: 15.0,
-        ),
-      ),
-    );
-  }
-
-  Widget _renderAlumnos() {
-    if (isLoading) {
-      return LoaderWidget.expanded(_size);
-    }
-    return Column(
-      children: [],
     );
   }
 }

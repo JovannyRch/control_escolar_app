@@ -17,12 +17,11 @@ class LoaderWidget extends StatelessWidget {
   static Widget expanded(Size size) {
     return Container(
       height: size.height * 0.9,
-      child: Expanded(
-          child: Center(
+      child: Center(
         child: CircularProgressIndicator(
-          valueColor: new AlwaysStoppedAnimation<Color>(kMainColor),
+      valueColor: new AlwaysStoppedAnimation<Color>(kMainColor),
         ),
-      )),
+      ),
     );
   }
 }
