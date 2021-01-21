@@ -1,21 +1,23 @@
 import 'package:control_escolar/const/const.dart';
+import 'package:control_escolar/models/ClaseModel.dart';
 import 'package:control_escolar/models/MateriaProfesorModel.dart';
 import 'package:control_escolar/services/profesor_service.dart';
+import 'package:control_escolar/widgets/ClassCard.dart';
 import 'package:control_escolar/widgets/LoaderWidget.dart';
 import 'package:control_escolar/widgets/MateriaPreviewProfesor.dart';
 import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
 
-class MateriasProfesor extends StatefulWidget {
+class ClasesProfesor extends StatefulWidget {
   @override
-  _MateriasProfesorState createState() => _MateriasProfesorState();
+  _ClasesProfesorState createState() => _ClasesProfesorState();
 }
 
-class _MateriasProfesorState extends State<MateriasProfesor> {
+class _ClasesProfesorState extends State<ClasesProfesor> {
   ProfesorService _service = new ProfesorService();
-  List<MateriaProfesorModel> materias = [];
+  List<ClaseModel> clases = [];
   bool isLoading = false;
-  
+
   Size _size;
 
   @override
@@ -25,16 +27,13 @@ class _MateriasProfesorState extends State<MateriasProfesor> {
     super.initState();
   }
 
-
-
   void fetchMaterias() async {
     setIsLoading(true);
-    materias = await _service.fetchMaterias();
+    clases = await _service.fetchClases();
     setIsLoading(false);
   }
 
-
-  void setIsLoading(bool val){
+  void setIsLoading(bool val) {
     setState(() {
       isLoading = val;
     });
@@ -42,7 +41,6 @@ class _MateriasProfesorState extends State<MateriasProfesor> {
 
   @override
   Widget build(BuildContext context) {
-
     _size = MediaQuery.of(context).size;
 
     return Container(
@@ -51,26 +49,27 @@ class _MateriasProfesorState extends State<MateriasProfesor> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 20.0),
-          TitleWidget(title: "Materias", color: kMainColor),
+          TitleWidget(title: "Mis clases", color: kMainColor),
           Expanded(
-              child: Container(
-            child: SingleChildScrollView(
-              child: _renderMateria(),
+            child: Container(
+              child: SingleChildScrollView(
+                child: _renderClases(),
+              ),
             ),
-          ))
+          )
         ],
       ),
     );
   }
 
-  Widget _renderMateria() {
-    if(isLoading){
+  Widget _renderClases() {
+    if (isLoading) {
       return LoaderWidget.expanded(_size);
     }
 
     return Column(
       children: [
-        ...materias.map((e) => MateriaPreviewProfesor(materia: e)).toList(),
+        ...clases.map((e) => ClassCard(clase: e)).toList(),
       ],
     );
   }

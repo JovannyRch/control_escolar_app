@@ -1,5 +1,6 @@
 import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/models/AlumnoModel.dart';
+import 'package:control_escolar/models/ClaseModel.dart';
 import 'package:control_escolar/models/ClasePreviewModel.dart';
 import 'package:control_escolar/models/GruposMateriaModel.dart';
 import 'package:control_escolar/models/MateriaProfesorModel.dart';
@@ -35,5 +36,13 @@ class ProfesorService {
 
     return [];
     //TODO: Change endpoint
+  }
+
+  Future<List<ClaseModel>> fetchClases() async {
+    if (IS_TESTING) {
+      return await Mock.clasesProfesor();
+    }
+
+    return [];
   }
 }

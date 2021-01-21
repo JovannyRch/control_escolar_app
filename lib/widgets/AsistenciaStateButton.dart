@@ -39,7 +39,7 @@ class AsistenciaStateButton extends StatelessWidget {
   IconData _getIcon() {
     switch (valorAsistencia) {
       case AsistenciaModel.SIN_ASIGNAR:
-        return FontAwesomeIcons.ad;
+        return FontAwesomeIcons.minus;
       case AsistenciaModel.ASISTENCIA:
         return FontAwesomeIcons.check;
       case AsistenciaModel.INASISTENCIA:

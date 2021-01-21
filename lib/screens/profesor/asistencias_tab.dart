@@ -1,24 +1,24 @@
 import 'package:control_escolar/const/const.dart';
-import 'package:control_escolar/models/AlumnoModel.dart';
+import 'package:control_escolar/helpers/messages.dart';
 import 'package:control_escolar/models/AsistenciaModel.dart';
 import 'package:control_escolar/providers/profesor_provider.dart';
 import 'package:control_escolar/widgets/AsistenciaStateButton.dart';
 import 'package:control_escolar/widgets/LoaderWidget.dart';
 import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loading_button/loading_button.dart';
 import 'package:provider/provider.dart';
 
 class AsisTenciasTab extends StatelessWidget {
   ProfesorProvider _provider;
   Size _size;
+  final GlobalKey scaffoldKey;
+  AsisTenciasTab({@required this.scaffoldKey});
 
   @override
   Widget build(BuildContext context) {
     _size = MediaQuery.of(context).size;
     _provider = Provider.of<ProfesorProvider>(context);
-    
 
     if (_provider.isLoadingAlumnos) {
       return LoaderWidget.expanded(_size);
@@ -34,7 +34,6 @@ class AsisTenciasTab extends StatelessWidget {
           TitleWidget(title: "Alumnos", color: kMainColor),
           SizedBox(height: 10.0),
           _renderAlumnos(),
-          _submitDataButton(),
         ],
       ),
     );
@@ -66,17 +65,21 @@ class AsisTenciasTab extends StatelessWidget {
     final List fixedList =
         Iterable<int>.generate(_provider.asistencias.length).toList();
 
-    return Container(
+    return Expanded(
+        child: Container(
       child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             ...fixedList
-                .map((index) => _asistenciaTile(_provider.asistencias[index], index))
-                .toList()
+                .map((index) =>
+                    _asistenciaTile(_provider.asistencias[index], index))
+                .toList(),
+            _submitDataButton(),
           ],
         ),
       ),
-    );
+    ));
   }
 
   Widget _asistenciaTile(AsistenciaModel asistencia, int index) {
@@ -118,9 +121,12 @@ class AsisTenciasTab extends StatelessWidget {
                   ),
                 ),
               ),
-              AsistenciaStateButton(valorAsistencia: asistencia.asistencia, onTap: (){
-                handleOnTapAsistenciaState(asistencia);
-              },),
+              AsistenciaStateButton(
+                valorAsistencia: asistencia.asistencia,
+                onTap: () {
+                  handleOnTapAsistenciaState(asistencia);
+                },
+              ),
             ],
           ),
         ],
@@ -128,7 +134,7 @@ class AsisTenciasTab extends StatelessWidget {
     );
   }
 
-  void handleOnTapAsistenciaState(AsistenciaModel asistencia){
+  void handleOnTapAsistenciaState(AsistenciaModel asistencia) {
     _provider.updateAlumnoAsistenciaState(asistencia.alumno.id);
   }
 
@@ -153,40 +159,18 @@ class AsisTenciasTab extends StatelessWidget {
     );
   }
 
-  Widget _input() {
-    return Container(
-      width: 30.0,
-      height: 30.0,
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.orange,
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(1, 1),
-              color: Colors.black.withOpacity(0.3),
-            )
-          ]),
-      margin: EdgeInsets.only(left: 10.0, right: 10.0),
-      child: Center(
-          child: FaIcon(
-        FontAwesomeIcons.clock,
-        color: Colors.white,
-        size: 15.0,
-      )),
-    );
-  }
-
   Widget _submitDataButton() {
     return Container(
-      margin: EdgeInsets.only(top: 20.0),
+      margin: EdgeInsets.only(top: 15.0, bottom: 50.0),
       child: Center(
         child: LoadingButton(
+          onPressed: handleSubmit,
           decoration: BoxDecoration(
             color: kSecondaryColor,
             borderRadius: BorderRadius.circular(10.0),
           ),
           child: Text(
-            "Enviar",
+            "Finalizar pase de lista",
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w600,
@@ -195,5 +179,24 @@ class AsisTenciasTab extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void handleSubmit() {
+    if (!isDataCompleted()) {
+      showNotCompletedData();
+    } else {}
+  }
+
+  void showNotCompletedData() {
+    Message.showSnackBarMessage(scaffoldKey, "Hay alumnos sin valor de asistencia");
+  }
+
+  bool isDataCompleted() {
+    for (AsistenciaModel asitencia in _provider.asistencias) {
+      if (asitencia.asistencia == AsistenciaModel.SIN_ASIGNAR) {
+        return false;
+      }
+    }
+    return true;
   }
 }

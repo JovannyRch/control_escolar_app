@@ -6,7 +6,6 @@ import 'package:control_escolar/providers/profesor_provider.dart';
 import 'package:control_escolar/screens/profesor/asistencias_tab.dart';
 import 'package:control_escolar/services/profesor_service.dart';
 import 'package:control_escolar/widgets/CustomAppBar.dart';
-import 'package:control_escolar/widgets/LoaderWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,8 +23,9 @@ class _AlumnosProfesorScreenState extends State<AlumnosProfesorScreen> {
   Size _size;
   ProfesorService _service = new ProfesorService();
   ProfesorProvider _provider;
-
   List<AlumnoModel> alumnos;
+  GlobalKey key;
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -54,12 +54,12 @@ class _AlumnosProfesorScreenState extends State<AlumnosProfesorScreen> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        key: scaffoldKey,
         appBar: CustomAppBar(
-          title: "${widget.grupo.nombre}",
-          leading: _backIcon(),
-          tabs: _tabs(),
-          subtitle: "${widget.materia.nombre}"
-        ),
+            title: "${widget.grupo.nombre}",
+            leading: _backIcon(),
+            tabs: _tabs(),
+            subtitle: "${widget.materia.nombre}"),
         body: _body(),
       ),
     );
@@ -88,7 +88,7 @@ class _AlumnosProfesorScreenState extends State<AlumnosProfesorScreen> {
   Widget _body() {
     return TabBarView(
       children: [
-        AsisTenciasTab(),
+        AsisTenciasTab(scaffoldKey: scaffoldKey),
         Container(),
       ],
     );

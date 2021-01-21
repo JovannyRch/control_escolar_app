@@ -1,10 +1,11 @@
-
+import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/helpers/global_helpers.dart';
-import 'package:control_escolar/screens/profesor/materias_profesor_screen.dart';
+import 'package:control_escolar/screens/profesor/clases_profesor_screen.dart';
 import 'package:control_escolar/shared/user_preferences.dart';
 import 'package:control_escolar/widgets/CustomAppBar.dart';
 import 'package:control_escolar/widgets/SideMenu.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeProfesorScreen extends StatefulWidget {
   static const routeName = '/homeProfesor';
@@ -15,8 +16,8 @@ class HomeProfesorScreen extends StatefulWidget {
 }
 
 class _HomeProfesorScreenState extends State<HomeProfesorScreen> {
-
   var scaffoldKey = GlobalKey<ScaffoldState>();
+  int _currentIndex = 0;
 
   UserPrefrences userPrefrences = new UserPrefrences();
 
@@ -37,10 +38,48 @@ class _HomeProfesorScreenState extends State<HomeProfesorScreen> {
         ],
       ),
       body: _body(),
+      bottomNavigationBar: _bottomNavigation(),
+    );
+  }
+
+  Widget _bottomNavigation() {
+    return BottomNavigationBar(
+      currentIndex: _currentIndex,
+      backgroundColor: kMainColor,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.grey.withOpacity(0.82),
+      onTap: (value) {
+        setState(() {
+          _currentIndex = value;
+        });
+      },
+      items: [
+        BottomNavigationBarItem(
+            icon: FaIcon(
+              FontAwesomeIcons.book,
+            ),
+            label: "Clases"),
+        BottomNavigationBarItem(
+            icon: FaIcon(
+              FontAwesomeIcons.check,
+            ),
+            label: "Pase de lista",
+            backgroundColor: Colors.white),
+        BottomNavigationBarItem(
+            icon: Icon(
+              Icons.grade,
+            ),
+            label: "Calificaciones"),
+      ],
     );
   }
 
   Widget _body() {
-    return MateriasProfesor();
+    return IndexedStack(
+      index: _currentIndex,
+      children: [
+        ClasesProfesor(),
+      ],
+    );
   }
 }
