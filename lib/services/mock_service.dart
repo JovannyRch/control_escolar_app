@@ -103,9 +103,9 @@ class Mock {
           grado: "1",
           grupo: "B",
           horarios: [
-            new HorarioModel(entrada: 420, salida: 540, dia: 0),
-            new HorarioModel(entrada: 660, salida: 10000, dia: 2),
-            new HorarioModel(entrada: 420, salida: 540, dia: 4),
+            new HorarioModel(entrada: 420, salida: 540, dia: 2),
+            new HorarioModel(entrada: 660, salida: 100000000, dia: 4),
+            new HorarioModel(entrada: 0, salida: 100000000, dia: 5),
           ]),
       new ClaseModel(
           materia: "Español 1", grado: "1", grupo: "B", horarios: []),

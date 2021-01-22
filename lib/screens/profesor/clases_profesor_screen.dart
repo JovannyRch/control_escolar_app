@@ -1,8 +1,11 @@
 import 'package:control_escolar/const/const.dart';
+import 'package:control_escolar/helpers/time_helper.dart';
 import 'package:control_escolar/models/ClaseModel.dart';
+import 'package:control_escolar/models/HorarioModel.dart';
 import 'package:control_escolar/models/MateriaProfesorModel.dart';
 import 'package:control_escolar/services/profesor_service.dart';
 import 'package:control_escolar/widgets/ClassCard.dart';
+import 'package:control_escolar/widgets/CurrentClass.dart';
 import 'package:control_escolar/widgets/LoaderWidget.dart';
 import 'package:control_escolar/widgets/MateriaPreviewProfesor.dart';
 import 'package:control_escolar/widgets/TitleWidget.dart';
@@ -17,6 +20,7 @@ class _ClasesProfesorState extends State<ClasesProfesor> {
   ProfesorService _service = new ProfesorService();
   List<ClaseModel> clases = [];
   bool isLoading = false;
+  ClaseModel _currentClass;
 
   Size _size;
 
@@ -30,6 +34,7 @@ class _ClasesProfesorState extends State<ClasesProfesor> {
   void fetchMaterias() async {
     setIsLoading(true);
     clases = await _service.fetchClases();
+    _currentClass = ClaseModel.getCurrentClase(clases);
     setIsLoading(false);
   }
 
@@ -48,8 +53,10 @@ class _ClasesProfesorState extends State<ClasesProfesor> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          _renderCurrentClass(),
           SizedBox(height: 20.0),
           TitleWidget(title: "Mis clases", color: kMainColor),
+          SizedBox(height: 10.0),
           Expanded(
             child: Container(
               child: SingleChildScrollView(
@@ -62,6 +69,18 @@ class _ClasesProfesorState extends State<ClasesProfesor> {
     );
   }
 
+  Widget _renderCurrentClass() {
+    if (_currentClass == null) return Container();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 20.0),
+        TitleWidget(title: "Clase actual", color: kMainColor),
+        CurrentClass(clase: _currentClass),
+      ],
+    );
+  }
+
   Widget _renderClases() {
     if (isLoading) {
       return LoaderWidget.expanded(_size);
@@ -69,6 +88,7 @@ class _ClasesProfesorState extends State<ClasesProfesor> {
 
     return Column(
       children: [
+        
         ...clases.map((e) => ClassCard(clase: e)).toList(),
       ],
     );
