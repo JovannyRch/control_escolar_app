@@ -103,8 +103,10 @@ class Mock {
           grado: "1",
           grupo: "B",
           horarios: [
-            new HorarioModel(entrada: 420, salida: 540, dia: 2),
-            new HorarioModel(entrada: 660, salida: 100000000, dia: 4),
+            new HorarioModel(entrada: 0, salida: 100000000, dia: 1),
+            new HorarioModel(entrada: 0, salida: 100000000, dia: 2),
+            new HorarioModel(entrada: 0, salida: 100000000, dia: 3),
+            new HorarioModel(entrada: 0, salida: 100000000, dia: 4),
             new HorarioModel(entrada: 0, salida: 100000000, dia: 5),
           ]),
       new ClaseModel(

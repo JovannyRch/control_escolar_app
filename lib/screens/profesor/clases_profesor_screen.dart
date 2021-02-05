@@ -1,15 +1,13 @@
 import 'package:control_escolar/const/const.dart';
-import 'package:control_escolar/helpers/time_helper.dart';
 import 'package:control_escolar/models/ClaseModel.dart';
-import 'package:control_escolar/models/HorarioModel.dart';
-import 'package:control_escolar/models/MateriaProfesorModel.dart';
+import 'package:control_escolar/providers/profesor_provider.dart';
 import 'package:control_escolar/services/profesor_service.dart';
 import 'package:control_escolar/widgets/ClassCard.dart';
 import 'package:control_escolar/widgets/CurrentClass.dart';
 import 'package:control_escolar/widgets/LoaderWidget.dart';
-import 'package:control_escolar/widgets/MateriaPreviewProfesor.dart';
 import 'package:control_escolar/widgets/TitleWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ClasesProfesor extends StatefulWidget {
   @override
@@ -18,8 +16,8 @@ class ClasesProfesor extends StatefulWidget {
 
 class _ClasesProfesorState extends State<ClasesProfesor> {
   ProfesorService _service = new ProfesorService();
-  List<ClaseModel> clases = [];
-  bool isLoading = false;
+  ProfesorProvider _provider;
+
   ClaseModel _currentClass;
 
   Size _size;
@@ -27,26 +25,25 @@ class _ClasesProfesorState extends State<ClasesProfesor> {
   @override
   void initState() {
     // TODO: implement initState
-    this.fetchMaterias();
     super.initState();
   }
 
-  void fetchMaterias() async {
-    setIsLoading(true);
-    clases = await _service.fetchClases();
-    _currentClass = ClaseModel.getCurrentClase(clases);
-    setIsLoading(false);
-  }
-
-  void setIsLoading(bool val) {
-    setState(() {
-      isLoading = val;
-    });
+  void fetchClases() async {
+    _provider.isLoadingClases = true;
+    _provider.clases = await _service.fetchClases();
+    _currentClass = ClaseModel.getCurrentClase(_provider.clases);
+    _provider.isLoadingClases = false;
   }
 
   @override
   Widget build(BuildContext context) {
     _size = MediaQuery.of(context).size;
+
+    _provider = Provider.of<ProfesorProvider>(context);
+
+    if (_provider.clases == null) {
+      fetchClases();
+    }
 
     return Container(
       padding: EdgeInsets.only(left: 15.0),
@@ -82,14 +79,13 @@ class _ClasesProfesorState extends State<ClasesProfesor> {
   }
 
   Widget _renderClases() {
-    if (isLoading) {
+    if (_provider.isLoadingClases) {
       return LoaderWidget.expanded(_size);
     }
 
     return Column(
       children: [
-        
-        ...clases.map((e) => ClassCard(clase: e)).toList(),
+        ..._provider.clases.map((e) => ClassCard(clase: e)).toList(),
       ],
     );
   }

@@ -57,6 +57,7 @@ class CurrentClass extends StatelessWidget {
         icon: FaIcon(
           FontAwesomeIcons.check,
           color: Colors.white,
+          size: 15.0,
         ),
         label: Text(
           "Pasar lista",

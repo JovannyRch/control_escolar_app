@@ -7,20 +7,23 @@ Widget CustomAppBar({
   List<Widget> actions = const [],
   Widget leading = null,
   TabBar tabs,
+  Color color = null,
+  Color fontColor = null
 }) {
   return AppBar(
     automaticallyImplyLeading: false,
-    title: _titleAppbar(title, subtitle),
+    title: _titleAppbar(title, subtitle, fontColor),
     elevation: 0,
     actions: [
       ...actions,
     ],
     leading: leading,
     bottom: tabs,
+    backgroundColor: color == null? kGreyColor: color,
   );
 }
 
-Widget _titleAppbar(String title, String subtitle) {
+Widget _titleAppbar(String title, String subtitle, Color fontColor) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +32,7 @@ Widget _titleAppbar(String title, String subtitle) {
         title,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
-          color: Colors.black,
+          color: fontColor == null? Colors.black: fontColor,
           fontWeight: FontWeight.bold,
           fontSize: 15,
         ),
@@ -40,7 +43,7 @@ Widget _titleAppbar(String title, String subtitle) {
               subtitle,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
-                color: kDisableColor,
+                color: fontColor == null? kDisableColor: fontColor,
                 fontWeight: FontWeight.w300,
                 fontSize: 13,
               ),

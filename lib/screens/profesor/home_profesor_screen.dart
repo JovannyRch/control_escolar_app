@@ -1,5 +1,6 @@
 import 'package:control_escolar/const/const.dart';
 import 'package:control_escolar/helpers/global_helpers.dart';
+import 'package:control_escolar/screens/profesor/asistencias_tab.dart';
 import 'package:control_escolar/screens/profesor/clases_profesor_screen.dart';
 import 'package:control_escolar/shared/user_preferences.dart';
 import 'package:control_escolar/widgets/CustomAppBar.dart';
@@ -28,17 +29,19 @@ class _HomeProfesorScreenState extends State<HomeProfesorScreen> {
       backgroundColor: Colors.white,
       endDrawer: SideMenu(),
       appBar: CustomAppBar(
+        color: kMainColor,
+        fontColor: Colors.white,
         title: userPrefrences.fullName,
         subtitle: formatRole(userPrefrences.role.toString()),
         actions: [
           IconButton(
-            icon: Icon(Icons.menu, color: Colors.black),
+            icon: Icon(Icons.menu, color: Colors.white),
             onPressed: () => scaffoldKey.currentState.openEndDrawer(),
           )
         ],
       ),
       body: _body(),
-      bottomNavigationBar: _bottomNavigation(),
+     /*  bottomNavigationBar: _bottomNavigation(), */
     );
   }
 
@@ -75,11 +78,6 @@ class _HomeProfesorScreenState extends State<HomeProfesorScreen> {
   }
 
   Widget _body() {
-    return IndexedStack(
-      index: _currentIndex,
-      children: [
-        ClasesProfesor(),
-      ],
-    );
+    return  ClasesProfesor();
   }
 }
