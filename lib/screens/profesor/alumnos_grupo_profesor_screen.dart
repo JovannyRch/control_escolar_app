@@ -60,6 +60,9 @@ class _AlumnosProfesorScreenState extends State<AlumnosProfesorScreen> {
       child: Scaffold(
         key: scaffoldKey,
         appBar: CustomAppBar(
+            
+            color: kMainColor,
+            fontColor: Colors.white,
             title: "${widget.clase.grado}° ${widget.clase.grupo}",
             leading: _backIcon(),
             tabs: _tabs(),
@@ -71,9 +74,10 @@ class _AlumnosProfesorScreenState extends State<AlumnosProfesorScreen> {
 
   Widget _tabs() {
     return TabBar(
-      labelColor: kSecondaryColor,
+      labelColor: Colors.white,
       indicatorColor: kSecondaryColor,
-      unselectedLabelColor: kMainColor,
+      unselectedLabelColor:Colors.white60,
+      indicatorWeight: 3.0,
       labelStyle: TextStyle(fontSize: 11.0, fontWeight: FontWeight.w700),
       tabs: [
         Tab(text: "Asistencias"),
@@ -84,7 +88,7 @@ class _AlumnosProfesorScreenState extends State<AlumnosProfesorScreen> {
 
   Widget _backIcon() {
     return IconButton(
-      icon: Icon(Icons.arrow_back, color: kMainColor),
+      icon: Icon(Icons.arrow_back, color: Colors.white),
       onPressed: () => Navigator.of(context).pop(),
     );
   }
