@@ -99,6 +99,7 @@ class Mock {
     await delay();
     return [
       new ClaseModel(
+          id: 1,
           materia: "Matemáticas 1",
           grado: "1",
           grupo: "B",
@@ -110,11 +111,11 @@ class Mock {
             new HorarioModel(entrada: 0, salida: 100000000, dia: 5),
           ]),
       new ClaseModel(
-          materia: "Español 1", grado: "1", grupo: "B", horarios: []),
+          id: 2,materia: "Español 1", grado: "1", grupo: "B", horarios: []),
       new ClaseModel(
-          materia: "Historia 1", grado: "2", grupo: "A", horarios: []),
+          id: 3, materia: "Historia 1", grado: "2", grupo: "A", horarios: []),
       new ClaseModel(
-          materia: "Formación Cívica y Ética", grado: "3", grupo: "C", horarios: []),
+          id: 4,materia: "Formación Cívica y Ética", grado: "3", grupo: "C", horarios: []),
     ];
   }
 }

@@ -78,6 +78,6 @@ class _HomeProfesorScreenState extends State<HomeProfesorScreen> {
   }
 
   Widget _body() {
-    return  ClasesProfesor();
+    return  ClasesProfesor(scaffoldKey: scaffoldKey,);
   }
 }

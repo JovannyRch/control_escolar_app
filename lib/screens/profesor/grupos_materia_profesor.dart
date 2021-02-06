@@ -5,7 +5,6 @@ import 'package:control_escolar/services/profesor_service.dart';
 import 'package:control_escolar/widgets/CustomAppBar.dart';
 import 'package:control_escolar/widgets/LoaderWidget.dart';
 import 'package:control_escolar/widgets/TitleWidget.dart';
-import 'package:control_escolar/screens/profesor/alumnos_grupo_profesor_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -102,12 +101,12 @@ class _GruposMateriaProfesorScreenState
   }
 
   void handleTileGrupoClick(GruposMateriaModel grupo) {
-    Navigator.push(
+  /*   Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) =>
               AlumnosProfesorScreen(grupo: grupo, materia: widget.materia)),
-    );
+    ); */
   }
 
   Widget _nombre(String text) {

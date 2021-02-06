@@ -11,7 +11,7 @@ class ProfesorProvider with ChangeNotifier {
   List<ClaseModel> _clases;
   GruposMateriaModel _grupo;
 
-  List<AsistenciaModel> _asistencias;
+  List<AsistenciaModel> _asistencias = [];
 
   bool _isLoadingMaterias = false;
   bool _isLoadingAlumnos = false;

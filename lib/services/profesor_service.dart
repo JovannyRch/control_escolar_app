@@ -45,4 +45,12 @@ class ProfesorService {
 
     return [];
   }
+
+  Future<List<AlumnoModel>> fetchAlumnosFromClase(ClaseModel claseModel) async {
+     if (IS_TESTING) {
+      return await Mock.alumnos();
+    }
+
+    return [];
+  }
 }

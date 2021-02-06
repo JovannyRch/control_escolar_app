@@ -2,12 +2,14 @@ import 'package:control_escolar/helpers/time_helper.dart';
 import 'package:control_escolar/models/HorarioModel.dart';
 
 class ClaseModel {
+
+  int id;
   String grupo;
   String grado;
   String materia;
 
   List<HorarioModel> horarios;
-  ClaseModel({this.grupo, this.grado, this.materia, this.horarios});
+  ClaseModel({this.id, this.grupo, this.grado, this.materia, this.horarios});
 
    static ClaseModel getCurrentClase(List<ClaseModel> clases){
     int currentTimeInMinutes = TimeHelper.currentTimeInMinutes();

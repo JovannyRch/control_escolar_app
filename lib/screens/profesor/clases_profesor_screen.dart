@@ -10,6 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ClasesProfesor extends StatefulWidget {
+  final scaffoldKey;
+
+  ClasesProfesor({@required this.scaffoldKey});
+
   @override
   _ClasesProfesorState createState() => _ClasesProfesorState();
 }
@@ -85,7 +89,12 @@ class _ClasesProfesorState extends State<ClasesProfesor> {
 
     return Column(
       children: [
-        ..._provider.clases.map((e) => ClassCard(clase: e)).toList(),
+        ..._provider.clases
+            .map((e) => ClassCard(
+                  clase: e,
+                  scaffoldKey: widget.scaffoldKey,
+                ))
+            .toList(),
       ],
     );
   }
